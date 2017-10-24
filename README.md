@@ -1,1 +1,1 @@
-# ChatSystemPMS
+# This is a java chat system project created for PMS class in TU Varna masters degree.
