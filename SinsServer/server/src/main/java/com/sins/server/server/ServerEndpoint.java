@@ -11,8 +11,10 @@ import java.io.StringReader;
 import static java.lang.String.format;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -34,6 +36,7 @@ public class ServerEndpoint {
     @OnOpen
     public void onOpen(Session session) {
         System.out.println(format("%s joined the chat room.", session.getId()));
+        peers.put(session.getId(), session);
     }
 
     @OnMessage
@@ -41,16 +44,30 @@ public class ServerEndpoint {
         JsonReader jsonReader = Json.createReader(new StringReader(message));
         JsonObject jsonMessage = jsonReader.readObject();
         jsonReader.close();
-        Resolver.INSTANCE.resolve(jsonMessage);
+        try {
+            Resolver.INSTANCE.resolve(jsonMessage);
+        } catch (Exception e) {
+            JsonObject jsonResponse = Json
+                    .createObjectBuilder(jsonMessage)
+                    .add("content", Json
+                            .createObjectBuilder()
+                            .add("errorMessage", "Server could not process your request!")
+                            .build())
+                    .add("success", false)
+                    .build();
+            Map<String, JsonObject> errorResponse = new HashMap<>();
+            getClientIdsBySession(session)
+                    .forEach(clientid -> {
+                        errorResponse.put(clientid, jsonResponse);
+                    });
+            sendMessage(errorResponse);
+        }
     }
 
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {
         System.out.println(format("%s left the chat room.", session.getId()));
-        peers.entrySet()
-                .stream()
-                .filter(entry -> Objects.equals(entry.getValue(), session))
-                .map(Map.Entry::getKey)
+        getClientIdsBySession(session)
                 .forEach(clientid -> peers.remove(clientid));
     }
 
@@ -58,5 +75,13 @@ public class ServerEndpoint {
         for (Map.Entry<String, JsonObject> message : messageJson.entrySet()) {
             peers.get(message.getKey()).getBasicRemote().sendText(message.getValue().toString());
         }
+    }
+
+    private List<String> getClientIdsBySession(Session session) {
+        return peers.entrySet()
+                .stream()
+                .filter(entry -> Objects.equals(entry.getValue(), session))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 }
