@@ -35,8 +35,7 @@ public class ServerEndpoint {
 
     @OnOpen
     public void onOpen(Session session) {
-        System.out.println(format("%s joined the chat room.", session.getId()));
-        peers.put(session.getId(), session);
+        System.out.println("New session created.");
     }
 
     @OnMessage
@@ -55,12 +54,8 @@ public class ServerEndpoint {
                             .build())
                     .add("success", false)
                     .build();
-            Map<String, JsonObject> errorResponse = new HashMap<>();
-            getClientIdsBySession(session)
-                    .forEach(clientid -> {
-                        errorResponse.put(clientid, jsonResponse);
-                    });
-            sendMessage(errorResponse);
+         
+            sendMessage(session, jsonResponse);
         }
     }
 
@@ -73,9 +68,13 @@ public class ServerEndpoint {
 
     public static void sendMessage(Map<String, JsonObject> messageJson) throws IOException {
         for (Map.Entry<String, JsonObject> message : messageJson.entrySet()) {
-            peers.get(message.getKey()).getBasicRemote().sendText(message.getValue().toString());
+            sendMessage(peers.get(message.getKey()), message.getValue());
         }
     }
+    
+     public static void sendMessage(Session session, JsonObject messageJson) throws IOException {
+            session.getBasicRemote().sendText(messageJson.toString());
+        }
 
     private List<String> getClientIdsBySession(Session session) {
         return peers.entrySet()
