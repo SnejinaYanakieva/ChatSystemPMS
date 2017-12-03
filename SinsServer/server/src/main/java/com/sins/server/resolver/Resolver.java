@@ -5,6 +5,7 @@
  */
 package com.sins.server.resolver;
 
+import com.sins.server.bl.json.JsonBuilder;
 import java.util.HashMap;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -35,10 +36,7 @@ public class Resolver {
                 break;
             default:
                 String errorContent = "Requested type not recognized!";
-                JsonObject response = buildJson(json, false, Json
-                        .createObjectBuilder()
-                        .add("errorMessage", errorContent)
-                        .build());
+                JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
         return responseMap;
@@ -62,10 +60,7 @@ public class Resolver {
                 break;
             default:
                 String errorContent = "Requested USER type subtype not recognized!";
-                JsonObject response = buildJson(json, false, Json
-                        .createObjectBuilder()
-                        .add("errorMessage", errorContent)
-                        .build());
+                JsonObject response =JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
         return responseMap;
@@ -87,10 +82,7 @@ public class Resolver {
                 break;
             default:
                 String errorContent = "Requested USER type subtype not recognized!";
-                JsonObject response = buildJson(json, false, Json
-                        .createObjectBuilder()
-                        .add("errorMessage", errorContent)
-                        .build());
+                JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
         return responseMap;
@@ -112,10 +104,7 @@ public class Resolver {
                 break;
             default:
                 String errorContent = "Requested CHAT type subtype not recognized!";
-                JsonObject response = buildJson(json, false, Json
-                        .createObjectBuilder()
-                        .add("errorMessage", errorContent)
-                        .build());
+                JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
         return responseMap;
@@ -135,23 +124,10 @@ public class Resolver {
                 break;
             default:
                 String errorContent = "Requested GROUP type subtype not recognized!";
-                JsonObject response = buildJson(json, false, Json
-                        .createObjectBuilder()
-                        .add("errorMessage", errorContent)
-                        .build());
+                JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
         return responseMap;
     }
 
-    private JsonObject buildJson(JsonObject requestJson, boolean success, JsonObject content) {
-        return Json
-                .createObjectBuilder()
-                .add("type", requestJson.getString("type"))
-                .add("subtype", requestJson.getString("subtype"))
-                .add("senderId", requestJson.getString("clientId"))
-                .add("success", success)
-                .add("content", content)
-                .build();
-    }
 }
