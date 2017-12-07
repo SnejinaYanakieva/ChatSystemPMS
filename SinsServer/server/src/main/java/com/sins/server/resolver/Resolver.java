@@ -6,9 +6,11 @@
 package com.sins.server.resolver;
 
 import com.sins.server.bl.json.JsonBuilder;
+import com.sins.server.server.ServerEndpoint;
 import java.util.HashMap;
-import javax.json.Json;
+import java.util.Map;
 import javax.json.JsonObject;
+import javax.websocket.Session;
 
 /**
  *
@@ -18,35 +20,36 @@ public class Resolver {
 
     public static final Resolver INSTANCE = new Resolver();
 
-    public HashMap<String, JsonObject> resolve(JsonObject json) {
+    public Map<String, JsonObject> resolve(JsonObject json, Session session) {
         HashMap<String, JsonObject> responseMap = new HashMap<String, JsonObject>();
         String type = json.getString("type");
         switch (type) {
             case "USER":
-                resolveUserTypeRequests(json);
+                resolveUserTypeRequests(json, session, responseMap);
                 break;
             case "FRIEND":
-                resolveFriendTypeRequests(json);
+                resolveFriendTypeRequests(json, responseMap);
                 break;
             case "GROUP":
-                resolveGroupTypeRequests(json);
+                resolveGroupTypeRequests(json, responseMap);
                 break;
             case "CHAT":
-                resolveChatTypeRequests(json);
+                resolveChatTypeRequests(json, responseMap);
                 break;
             default:
                 String errorContent = "Requested type not recognized!";
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
-        return responseMap;
+       return responseMap;
     }
 
-    private HashMap<String, JsonObject> resolveUserTypeRequests(JsonObject json) {
-        HashMap<String, JsonObject> responseMap = new HashMap<String, JsonObject>();
+    private void resolveUserTypeRequests(JsonObject json, Session session, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
         switch (subtype) {
             case "register":
+                ServerEndpoint.peers.put(json.getString("clientid"), session);
+                responseMap.put(json.getString("clientid"), JsonBuilder.INSTANCE.buildErrorJson(json, "registe function called"));
                 break;
             case "login":
                 break;
@@ -63,11 +66,10 @@ public class Resolver {
                 JsonObject response =JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
-        return responseMap;
+       
     }
 
-    private HashMap<String, JsonObject> resolveFriendTypeRequests(JsonObject json) {
-        HashMap<String, JsonObject> responseMap = new HashMap<String, JsonObject>();
+    private void resolveFriendTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
         switch (subtype) {
             case "createGroup":
@@ -85,11 +87,10 @@ public class Resolver {
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
-        return responseMap;
+       
     }
 
-    private HashMap<String, JsonObject> resolveChatTypeRequests(JsonObject json) {
-        HashMap<String, JsonObject> responseMap = new HashMap<String, JsonObject>();
+    private void resolveChatTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
         switch (subtype) {
             case "sendMessageToFriend":
@@ -107,11 +108,10 @@ public class Resolver {
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
-        return responseMap;
+       
     }
 
-    private HashMap<String, JsonObject> resolveGroupTypeRequests(JsonObject json) {
-        HashMap<String, JsonObject> responseMap = new HashMap<String, JsonObject>();
+    private void resolveGroupTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
         switch (subtype) {
             case "getAllFriends":
@@ -127,7 +127,7 @@ public class Resolver {
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
-        return responseMap;
+       
     }
 
 }

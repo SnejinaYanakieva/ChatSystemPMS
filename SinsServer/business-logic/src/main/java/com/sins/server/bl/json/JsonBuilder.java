@@ -22,7 +22,7 @@ public class JsonBuilder {
                 .createObjectBuilder()
                 .add("type", requestJson.getString("type"))
                 .add("subtype", requestJson.getString("subtype"))
-                .add("senderId", requestJson.getString("clientId"))
+                .add("senderId", requestJson.getString("clientid"))
                 .add("success", success)
                 .add("content", content)
                 .build();

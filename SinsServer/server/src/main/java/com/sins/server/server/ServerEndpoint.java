@@ -31,12 +31,13 @@ import javax.websocket.Session;
 @javax.websocket.server.ServerEndpoint(value = "/chat")
 public class ServerEndpoint {
 
-    static Map<String, Session> peers = Collections.synchronizedMap(new HashMap<String, Session>());
+    public static Map<String, Session> peers = Collections.synchronizedMap(new HashMap<String, Session>());
 
     @OnOpen
     public void onOpen(Session session) {
         System.out.println("New session created.");
     }
+    
 
     @OnMessage
     public void onMessage(String message, Session session) throws IOException, EncodeException {
@@ -44,7 +45,8 @@ public class ServerEndpoint {
         JsonObject jsonMessage = jsonReader.readObject();
         jsonReader.close();
         try {
-            Resolver.INSTANCE.resolve(jsonMessage);
+            Map<String, JsonObject> map= Resolver.INSTANCE.resolve(jsonMessage, session);
+            sendMessage(map);
         } catch (Exception e) {
             JsonObject jsonResponse = Json
                     .createObjectBuilder(jsonMessage)
