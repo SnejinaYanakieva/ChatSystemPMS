@@ -13,6 +13,11 @@
    <packaging>jar</packaging> 
   <dependencies>
     <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>3.21.0</version>
+    </dependency>
+    <dependency>
 	<groupId>${project.groupId}</groupId>
 	<artifactId>model</artifactId>
   </dependency>

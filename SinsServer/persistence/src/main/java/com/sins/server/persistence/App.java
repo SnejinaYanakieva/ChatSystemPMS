@@ -1,5 +1,4 @@
 package com.sins.server.persistence;
-
 /**
  * Hello world!
  *
