@@ -8,6 +8,7 @@ public class ChatClient extends Person {
     private List<Group> groupLIst;
 
     public List<Person> getFriendList() {
+        int a;
         return friendList;
     }
 
