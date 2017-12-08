@@ -16,7 +16,7 @@ import java.util.Scanner;
 import javax.websocket.Session;
 import org.glassfish.tyrus.client.ClientManager;
 
-class Client {
+public class Client {
 public static String userID = null;
 
     public static final String SERVER = "ws://localhost:8080/ws/chat";
