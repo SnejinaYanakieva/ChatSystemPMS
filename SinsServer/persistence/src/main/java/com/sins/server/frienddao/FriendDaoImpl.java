@@ -8,16 +8,6 @@ import java.util.List;
 
 public class FriendDaoImpl implements FriendDao {
     
-    private Connection connect() {
-        String url = "jdbc:sqlite:sinsdatabase.db";
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
     
     @Override
     public ChatClient getAllFriends(String userid) {

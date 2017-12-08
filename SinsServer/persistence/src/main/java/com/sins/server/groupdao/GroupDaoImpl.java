@@ -9,17 +9,6 @@ import java.util.List;
 
 public class GroupDaoImpl implements GroupDao {
     
-    private Connection connect() {
-        String url = "jdbc:sqlite:sinsdatabase.db";
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
-    
     @Override
     public Group createGroup(String groupName, String userid) {
         throw new UnsupportedOperationException();
