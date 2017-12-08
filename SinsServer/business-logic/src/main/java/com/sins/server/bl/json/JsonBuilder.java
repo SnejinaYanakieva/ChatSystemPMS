@@ -23,7 +23,6 @@ public class JsonBuilder {
                 .add("type", requestJson.getString("type"))
                 .add("subtype", requestJson.getString("subtype"))
                 .add("senderId", requestJson.getString("clientid"))
-                .add("success", success)
                 .add("content", content)
                 .build();
     }
@@ -32,6 +31,22 @@ public class JsonBuilder {
        return buildJson(requestJson, false, Json
                         .createObjectBuilder()
                         .add("errorMessage", errorContent)
+                        .add("success", false)
                         .build());
+    }
+    
+    public JsonObject buildErrorJsonConent(String errorContent){
+       return Json
+                        .createObjectBuilder()
+                        .add("errorMessage", errorContent)
+                        .add("success", false)
+                        .build();
+    }
+    
+     public JsonObject buildEmptySuccessJsonConent(){
+       return Json
+                        .createObjectBuilder()
+                        .add("success", true)
+                        .build();
     }
 }
