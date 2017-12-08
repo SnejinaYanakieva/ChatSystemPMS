@@ -2,7 +2,7 @@ package com.sins.client.model;
 
 import java.util.List;
 
-class CurrentClient extends Person{
+public class CurrentClient extends Person{
     
     private String nickName;
     private String email;
