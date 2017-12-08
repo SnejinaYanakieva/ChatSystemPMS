@@ -12,28 +12,28 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="400.0" style="-fx-background-color: rgba(0,0,0,0)" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sins.client.gui.javafxapplication2.FXMLDocumentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="400.0" style="-fx-background-color: rgba(0,0,0,0)" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sins.client.gui.FXMLDocumentController">
    <children>
       <AnchorPane id="header" prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: #80d926;">
          <children>
             <ImageView id="userButton" fx:id="userButton" fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/account.png" />
+                  <Image url="@images/account.png" />
                </image>
             </ImageView>
             <ImageView id="friendsButton" fx:id="friendsButton" fitHeight="40.0" fitWidth="40.0" layoutX="80.0" layoutY="10.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/friends.png" />
+                  <Image url="@images/friends.png" />
                </image>
             </ImageView>
             <ImageView id="settingsButton" fx:id="settingsButton" fitHeight="40.0" fitWidth="40.0" layoutX="290.0" layoutY="10.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/settings.png" />
+                  <Image url="@images/settings.png" />
                </image>
             </ImageView>
             <ImageView id="powerButton" fx:id="powerButton" fitHeight="40.0" fitWidth="40.0" layoutX="350.0" layoutY="10.0" onMouseClicked="#handleButtonAction" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/turnoff.png" />
+                  <Image url="@images/turnoff.png" />
                </image>
             </ImageView>
          </children>
@@ -64,7 +64,7 @@
                      <top>
                         <ImageView fitHeight="103.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/unknown.png" />
+                              <Image url="@images/unknown.png" />
                            </image>
                            <BorderPane.margin>
                               <Insets />

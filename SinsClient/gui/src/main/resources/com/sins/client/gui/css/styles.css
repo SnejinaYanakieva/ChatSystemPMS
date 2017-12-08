@@ -1,0 +1,11 @@
+.introPane{
+    -fx-background-color: #FCE19C;
+}
+
+.loginPane {
+    -fx-background-color: #E8613A;
+}
+
+.loginRibbon{
+    -fx-background-color: #808080;
+}

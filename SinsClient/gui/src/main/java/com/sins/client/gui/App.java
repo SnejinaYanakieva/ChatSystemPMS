@@ -18,11 +18,13 @@ public class App extends Application
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("LoginFXML.fxml"));
         
-        primaryStage.initStyle(StageStyle.TRANSPARENT); // removes the window buttons
+        //primaryStage.initStyle(StageStyle.TRANSPARENT); // removes the window buttons
         
-        Scene scene = new Scene(root, Color.rgb(0, 0, 0, 0)); // sets transparent background x1 (x2 is in fxml)
+        //Scene scene = new Scene(root, Color.rgb(0, 0, 0, 0)); // sets transparent background x1 (x2 is in fxml)
+        
+        Scene scene = new Scene(root);
         
         primaryStage.setScene(scene);
         primaryStage.show();
