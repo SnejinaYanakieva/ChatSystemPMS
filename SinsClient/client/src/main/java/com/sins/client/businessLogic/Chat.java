@@ -5,25 +5,28 @@
  */
 package com.sins.client.businessLogic;
 
-import java.util.List;
+import java.io.File;
 
 /**
  *
  * @author Стефан
  */
 public class Chat {
-    public void	sendMessageToFriend(String senderID, String recieverID) {
-    
+
+    public void sendMessageToFriend(String recieverID, String message) {
+
     }
-    public void sendFileAcceptRequest(String senderID, String recieverID) {
-    
+
+    public void sendFileAcceptRequest(String recieverID) {
+
     }
-    public void	sendFileToFriend(String senderID, String recieverID){
-    
+
+    public void sendFileToFriend(String recieverID, File file) {
+
     }
-    public void sendMessageToGroup(String senderID,List<String> listFriendsID){
-    
-    } 
-    
-    
+
+    public void sendMessageToGroup(Group group, String message) {
+
+    }
+
 }

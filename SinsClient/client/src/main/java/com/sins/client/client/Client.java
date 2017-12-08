@@ -9,6 +9,8 @@ package com.sins.client.client;
  *
  * @author Lenovo
  */
+import com.sins.client.businessLogic.User;
+import com.sins.client.model.CurrentClient;
 import java.net.URI;
 import java.util.Scanner;
 import javax.websocket.Session;
@@ -27,16 +29,14 @@ public static String userID = null;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Tiny Chat!");
         System.out.println("What's your name?");
-        String user = scanner.nextLine();
         Session session = client.connectToServer(ClientEnd.class, new URI(SERVER));
-        System.out.println("You are logged in as: " + user);
+        ClientEnd.setSession(session);
 
         // repeatedly read a message and send it to the server (until quit)
-        do {
-
-            message = scanner.nextLine();
-            session.getBasicRemote().sendText(createUserJson(message));
-        } while (!message.equalsIgnoreCase("quit"));
+            CurrentClient currClient = new CurrentClient();
+            currClient.setName("ggbg");
+            new User().register(currClient, "alabala");
+            System.in.read();
     }
 
     private static String createUserJson(String message) {

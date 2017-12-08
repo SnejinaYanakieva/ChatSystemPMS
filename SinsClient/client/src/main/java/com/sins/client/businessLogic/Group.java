@@ -10,7 +10,7 @@ package com.sins.client.businessLogic;
  * @author Стефан
  */
 public class Group {
-   public void	createGroup(String groupName, String creatorID){
+   public void	createGroup(String groupName){//CreatorID e userID глобалка :)
    
    }
 public void addFriendToGroup(String friendID, String groupID){

@@ -23,6 +23,7 @@ import javax.websocket.Session;
 public class ClientEnd {
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+    private static Session session;
 
     @OnMessage
     public void onMessage(String message) throws IOException {
@@ -33,12 +34,12 @@ public class ClientEnd {
         System.out.println(jsonMessage);
     }
     
-    public void sendMessage(Json message)   {
-        
+    public static void  sendMessage(JsonObject message) throws IOException   {
+        session.getBasicRemote().sendText(message.toString());
     }
     
-    public void setSession(Session session){
-        
+    public static void setSession(Session session){
+        ClientEnd.session = session;
     }
     
 
