@@ -1,5 +1,6 @@
 package com.sins.server.persistence;
 
+import com.sins.server.database.CreateSinsDatabase;
 import static com.sins.server.database.CreateSinsDatabase.createTableGROUPS;
 import static com.sins.server.database.CreateSinsDatabase.createTableUSERS;
 import static com.sins.server.database.CreateSinsDatabase.createTableUSER_PERSONAL_INFO;
@@ -11,23 +12,23 @@ import java.sql.Statement;
 import junit.framework.Assert;
 
 public class TestSinsDatabase {
+    
+    private static Connection conn;
 
-    private static Connection connect() {
+    private static void connect() throws Exception {
 
         String url = "jdbc:sqlite:target/sinsdatabase.db";
-        Connection conn = null;
         try {
-            conn = DriverManager.getConnection(url);
+           conn =  CreateSinsDatabase.createConnection();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return conn;
     }
 
     public static boolean insert(String id, String username, String password) {
         String sql = "INSERT INTO USERS(ID, USERNAME, PASSWORD, IS_ACTIVE) VALUES(?,?,?,?)";
 
-        try (Connection conn = TestSinsDatabase.connect();
+        try (
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
             pstmt.setString(2, username);
@@ -42,9 +43,9 @@ public class TestSinsDatabase {
 
     }
 
-    public void testInsert() throws SQLException {
+    public void testInsert() throws SQLException, Exception {
         String query = "DROP TABLE IF EXISTS USERS";
-        Connection conn = TestSinsDatabase.connect();
+        TestSinsDatabase.connect();
         Statement st = conn.createStatement();
         st.executeUpdate(query);
         query = "DROP TABLE IF EXISTS USER_PERSONAL_INFO";
@@ -57,7 +58,7 @@ public class TestSinsDatabase {
         createTableGROUPS();
 
         Assert.assertTrue("A record could not be inserted", insert("IvoEBot", "username1", "1234"));
-
+        CreateSinsDatabase.closeConnection();
     }
 
 }

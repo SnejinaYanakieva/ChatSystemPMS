@@ -6,11 +6,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateSinsDatabase {
-    
+
+    static String url = "jdbc:sqlite:target/sinsdatabase.db";
+    static Connection conn = null;
+
+    public static Connection createConnection() throws Exception {
+        conn = DriverManager.getConnection(url);
+        return conn;
+    }
+
+    public static void closeConnection() throws Exception {
+        conn.close();
+    }
+
     public static void createTableUSERS() {
-        
-        String url = "jdbc:sqlite:target/sinsdatabase.db";
-        
+
         String query = "CREATE TABLE IF NOT EXISTS USERS (\n"
                 + "	ID TEXT,\n"
                 + "	USERNAME TEXT NOT NULL,\n"
@@ -18,19 +28,17 @@ public class CreateSinsDatabase {
                 + "     IS_ACTIVE BOOLEAN, \n"
                 + "     PRIMARY KEY (ID)\n"
                 + ");";
-        
-        try (Connection conn = DriverManager.getConnection(url);
+
+        try (
                 Statement stmt = conn.createStatement()) {
             stmt.execute(query);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public static void createTableUSER_PERSONAL_INFO() {
-        
-        String url = "jdbc:sqlite:target/sinsdatabase.db";
-        
+
         String query = "CREATE TABLE IF NOT EXISTS USER_PERSONAL_INFO (\n"
                 + "	ID TEXT,\n"
                 + "	NAME TEXT NOT NULL,\n"
@@ -41,19 +49,17 @@ public class CreateSinsDatabase {
                 + "     GROUP_LIST TEXT, \n"
                 + "     PRIMARY KEY (ID)\n"
                 + ");";
-        
-        try (Connection conn = DriverManager.getConnection(url);
+
+        try (
                 Statement stmt = conn.createStatement()) {
             stmt.execute(query);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public static void createTableGROUPS() {
-        
-        String url = "jdbc:sqlite:target/sinsdatabase.db";
-        
+
         String query = "CREATE TABLE IF NOT EXISTS GROUPS (\n"
                 + "	ID TEXT,\n"
                 + "	NAME TEXT NOT NULL,\n"
@@ -61,21 +67,23 @@ public class CreateSinsDatabase {
                 + "     PARTICIPANT_LIST TEXT, \n"
                 + "     PRIMARY KEY (ID)\n"
                 + ");";
-        
-        try (Connection conn = DriverManager.getConnection(url);
+
+        try (
                 Statement stmt = conn.createStatement()) {
             stmt.execute(query);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
- 
-    public static void main(String[] args) {
-        
+
+    public static void main(String[] args) throws Exception {
+
+        createConnection();
         createTableUSERS();
         createTableUSER_PERSONAL_INFO();
         createTableGROUPS();
-        
+        closeConnection();
+
     }
-    
+
 }
