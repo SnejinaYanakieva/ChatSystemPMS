@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface GroupDao {
     
-    Group createGroup(String groupName, int userid);
+    Group createGroup(String groupName, String userid);
     Group addFriendToGroup(int friendid, int groupid);
     Group removeFriendFromGroup(int friendid,int groupid);
     List<ChatClient> getAllGroupParticipants(int groupid);

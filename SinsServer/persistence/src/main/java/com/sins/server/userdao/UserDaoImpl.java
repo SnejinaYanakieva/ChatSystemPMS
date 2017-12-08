@@ -45,22 +45,22 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public CurrentClient readPersonalInfo(int userId) {
+    public CurrentClient readPersonalInfo(String userid) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public CurrentClient updatePersonalInfo(int userId, CurrentClient curClient) {
+    public CurrentClient updatePersonalInfo(String userid, CurrentClient curClient) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean logout(int userId) {
+    public boolean logout(String userid) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean deleteUser(int userId) {
+    public boolean deleteUser(String userid) {
         throw new UnsupportedOperationException();
     }
     

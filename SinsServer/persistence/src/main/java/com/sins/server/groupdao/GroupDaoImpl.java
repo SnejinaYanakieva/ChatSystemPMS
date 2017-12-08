@@ -21,7 +21,7 @@ public class GroupDaoImpl implements GroupDao {
     }
     
     @Override
-    public Group createGroup(String groupName, int userid) {
+    public Group createGroup(String groupName, String userid) {
         throw new UnsupportedOperationException();
     }
 

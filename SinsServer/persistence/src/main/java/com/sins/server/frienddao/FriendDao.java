@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface FriendDao {
     
-    ChatClient getAllFriends(int userid);
+    ChatClient getAllFriends(String userid);
     ChatClient searchNewFriend(String name);
-    ChatClient addNewFriend(int id, int userid);
-    ChatClient removeFriend(int id, int userid);
+    ChatClient addNewFriend(String id, String userid);
+    ChatClient removeFriend(String id, String userid);
     
 }

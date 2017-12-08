@@ -7,9 +7,9 @@ public interface UserDao {
     
     boolean register(CurrentClient curClient, String password) throws DbException;
     String login(String username, String password) throws DbException; 
-    CurrentClient readPersonalInfo(int userId) throws DbException;
-    CurrentClient updatePersonalInfo(int userId, CurrentClient curClient) throws DbException;
-    boolean logout(int userId) throws DbException;
-    boolean deleteUser(int userId) throws DbException;
+    CurrentClient readPersonalInfo(String userid) throws DbException;
+    CurrentClient updatePersonalInfo(String userid, CurrentClient curClient) throws DbException;
+    boolean logout(String userid) throws DbException;
+    boolean deleteUser(String userid) throws DbException;
     
 }

@@ -20,7 +20,7 @@ public class FriendDaoImpl implements FriendDao {
     }
     
     @Override
-    public ChatClient getAllFriends(int userid) {
+    public ChatClient getAllFriends(String userid) {
         throw new UnsupportedOperationException();
     }
     
@@ -30,12 +30,12 @@ public class FriendDaoImpl implements FriendDao {
     }
     
     @Override
-    public ChatClient addNewFriend(int id, int userid) {
+    public ChatClient addNewFriend(String id, String userid) {
         throw new UnsupportedOperationException();
     }
     
     @Override
-    public ChatClient removeFriend(int id, int userid) {     
+    public ChatClient removeFriend(String id, String userid) {     
         throw new UnsupportedOperationException();
     }
     
