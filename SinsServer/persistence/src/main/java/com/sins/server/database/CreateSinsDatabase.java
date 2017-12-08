@@ -9,7 +9,7 @@ public class CreateSinsDatabase {
     
     public static void createTableUSERS() {
         
-        String url = "jdbc:sqlite:sinsdatabase.db";
+        String url = "jdbc:sqlite:target/sinsdatabase.db";
         
         String query = "CREATE TABLE IF NOT EXISTS USERS (\n"
                 + "	ID TEXT,\n"
@@ -29,7 +29,7 @@ public class CreateSinsDatabase {
     
     public static void createTableUSER_PERSONAL_INFO() {
         
-        String url = "jdbc:sqlite:sinsdatabase.db";
+        String url = "jdbc:sqlite:target/sinsdatabase.db";
         
         String query = "CREATE TABLE IF NOT EXISTS USER_PERSONAL_INFO (\n"
                 + "	ID TEXT,\n"
@@ -52,7 +52,7 @@ public class CreateSinsDatabase {
     
     public static void createTableGROUPS() {
         
-        String url = "jdbc:sqlite:sinsdatabase.db";
+        String url = "jdbc:sqlite:target/sinsdatabase.db";
         
         String query = "CREATE TABLE IF NOT EXISTS GROUPS (\n"
                 + "	ID TEXT,\n"

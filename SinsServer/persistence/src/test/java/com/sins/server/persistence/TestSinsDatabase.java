@@ -14,7 +14,7 @@ public class TestSinsDatabase {
 
     private static Connection connect() {
 
-        String url = "jdbc:sqlite:sinsdatabase.db";
+        String url = "jdbc:sqlite:target/sinsdatabase.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
