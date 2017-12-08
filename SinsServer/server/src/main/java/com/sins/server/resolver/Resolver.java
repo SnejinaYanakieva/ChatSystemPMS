@@ -49,7 +49,8 @@ public class Resolver {
         switch (subtype) {
             case "register":
                 ServerEndpoint.peers.put(json.getString("clientid"), session);
-                responseMap.put(json.getString("clientid"), JsonBuilder.INSTANCE.buildErrorJson(json, "registe function called"));
+                System.out.println(json.getJsonObject("content").toString());
+                responseMap.put(json.getString("clientid"), JsonBuilder.INSTANCE.buildErrorJson(json, json.getJsonObject("content").toString()));
                 break;
             case "login":
                 break;
