@@ -12,7 +12,7 @@ public class CreateSinsDatabase {
         String url = "jdbc:sqlite:sinsdatabase.db";
         
         String query = "CREATE TABLE IF NOT EXISTS USERS (\n"
-                + "	ID INTEGER,\n"
+                + "	ID TEXT,\n"
                 + "	USERNAME TEXT NOT NULL,\n"
                 + "	PASSWORD TEXT NOT NULL, \n"
                 + "     IS_ACTIVE BOOLEAN, \n"
@@ -32,7 +32,7 @@ public class CreateSinsDatabase {
         String url = "jdbc:sqlite:sinsdatabase.db";
         
         String query = "CREATE TABLE IF NOT EXISTS USER_PERSONAL_INFO (\n"
-                + "	ID INTEGER,\n"
+                + "	ID TEXT,\n"
                 + "	NAME TEXT NOT NULL,\n"
                 + "	EMAIL TEXT, \n"
                 + "     PHONE TEXT, \n"
@@ -55,7 +55,7 @@ public class CreateSinsDatabase {
         String url = "jdbc:sqlite:sinsdatabase.db";
         
         String query = "CREATE TABLE IF NOT EXISTS GROUPS (\n"
-                + "	ID INTEGER,\n"
+                + "	ID TEXT,\n"
                 + "	NAME TEXT NOT NULL,\n"
                 + "	OWNER_ID INTEGER NOT NULL, \n"
                 + "     PARTICIPANT_LIST TEXT, \n"
@@ -75,10 +75,6 @@ public class CreateSinsDatabase {
         createTableUSERS();
         createTableUSER_PERSONAL_INFO();
         createTableGROUPS();
-        
-        TestSinsDatabase app = new TestSinsDatabase();
-
-        app.insert(1, "username1", "1234");
         
     }
     

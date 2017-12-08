@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Person login(String username, String password) {
+    public String login(String username, String password) {
         throw new UnsupportedOperationException();
     }
 

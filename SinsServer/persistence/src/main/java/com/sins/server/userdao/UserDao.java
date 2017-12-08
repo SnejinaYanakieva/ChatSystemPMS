@@ -1,15 +1,15 @@
 package com.sins.server.userdao;
 
 import com.sins.server.model.CurrentClient;
-import com.sins.server.model.Person;
+import com.sins.server.persistence.DbException;
 
 public interface UserDao {
     
-    boolean register(CurrentClient curClient, String password);
-    Person login(String username, String password); 
-    CurrentClient readPersonalInfo(int userId);
-    CurrentClient updatePersonalInfo(int userId, CurrentClient curClient);
-    boolean logout(int userId);
-    boolean deleteUser(int userId);
+    boolean register(CurrentClient curClient, String password) throws DbException;
+    String login(String username, String password) throws DbException; 
+    CurrentClient readPersonalInfo(int userId) throws DbException;
+    CurrentClient updatePersonalInfo(int userId, CurrentClient curClient) throws DbException;
+    boolean logout(int userId) throws DbException;
+    boolean deleteUser(int userId) throws DbException;
     
 }
