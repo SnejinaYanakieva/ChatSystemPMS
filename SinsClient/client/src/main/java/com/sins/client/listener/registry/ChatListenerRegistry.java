@@ -6,7 +6,9 @@
 package com.sins.client.listener.registry;
 
 import com.sins.client.listener.ResponseListener;
+import com.sins.client.model.message.ServerMessage;
 import java.io.File;
+import java.util.Map;
 
 /**
  *
@@ -14,14 +16,14 @@ import java.io.File;
  */
 public interface ChatListenerRegistry {
 
-    public ResponseListener getMessageFromFriend(String senderID, String message);
+    public ResponseListener<ServerMessage<String>> getMessageFromFriend();
 
-    public ResponseListener getFileAcceptRequest(String senderID);
+    public ResponseListener<ServerMessage<String>> getFileAcceptRequest();
 
-    public ResponseListener getFileAcceptResponse(String senderID, boolean response);
+    public ResponseListener<ServerMessage<Boolean>> getFileAcceptResponse();
 
-    public ResponseListener getFileFromFriend(String senderID, File file);
+    public ResponseListener<ServerMessage<File>> getFileFromFriend();
 
-    public ResponseListener getMessageFromGroup(String groupID, String message);
+    public ResponseListener<ServerMessage<Map<String,String>>> getMessageFromGroup();
 
 }

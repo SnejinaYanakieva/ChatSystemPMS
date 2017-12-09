@@ -14,14 +14,14 @@ import com.sins.client.model.Group;
  */
 public interface GroupListenerRegistry {
 
-    public ResponseListener createGroup(Group friend);
+    public ResponseListener<Group> createGroup();
 
-    public ResponseListener addFriendToGroup(Group friend);
+    public ResponseListener<Group> addFriendToGroup();
 
-    public ResponseListener removeFriendFromGroup(String serverResponse);
+    public ResponseListener<Group> removeFriendFromGroup();
 
    // public ResponseListener getAllGroupParticipants(); -> Не ни трябва, има го при addFriendToGroup. 
 
-    public ResponseListener deleteGroup();
+    public ResponseListener<String> deleteGroup();
 
 }

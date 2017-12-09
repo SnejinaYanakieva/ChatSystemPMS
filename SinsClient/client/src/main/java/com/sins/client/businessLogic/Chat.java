@@ -10,6 +10,7 @@ import com.sins.client.client.Client;
 import com.sins.client.client.ClientEnd;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -20,7 +21,8 @@ import javax.json.JsonReader;
  * @author Стефан
  */
 public class Chat {
-
+  PrintWriter chatHistoryWriter;
+  
     public void sendMessageToFriend(String recieverID, String message) throws IOException {
         JsonObject jsonContent = Json
                 .createObjectBuilder()
@@ -36,6 +38,12 @@ public class Chat {
                 .add("content", jsonContent)
                 .build();
         ClientEnd.sendMessage(json);
+        // добавяне на съобщение в файл, history;
+          chatHistoryWriter = new PrintWriter("../webapp/target/ChatWith"+recieverID+".txt", "UTF-8");
+          chatHistoryWriter.append("Send to :" + recieverID + "\n");  
+          chatHistoryWriter.append(message);
+
+           chatHistoryWriter.close();
     }
 
     public void sendFileAcceptRequest(String recieverID) throws IOException {

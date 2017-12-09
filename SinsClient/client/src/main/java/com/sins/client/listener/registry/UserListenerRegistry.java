@@ -14,14 +14,14 @@ import com.sins.client.model.CurrentClient;
  */
 public interface UserListenerRegistry {
 
-    public ResponseListener getRegisterListener();
+    public ResponseListener<String> getRegisterListener();
 
-    public ResponseListener getLoginListener();
+    public ResponseListener<String> getLoginListener();
 
-    public ResponseListener getShowPersonalInfoListener(CurrentClient personalInfo);
+    public ResponseListener<CurrentClient> getShowPersonalInfoListener();
 
-    public ResponseListener getLogoutListener();
+    public ResponseListener<String> getLogoutListener();
 
-    public ResponseListener getDeleteUserListener();
+    public ResponseListener<String> getDeleteUserListener();
 
 }

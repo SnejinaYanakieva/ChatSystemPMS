@@ -16,12 +16,12 @@ import java.util.List;
  */
 public interface FriendListenerRegistry {
 
-    public ResponseListener getAllFriends(ChatClient chatClient);
+    public ResponseListener<ChatClient> getAllFriends();
 
-    public ResponseListener searchNewFriend(List<Person> friends);
+    public ResponseListener<List<Person>> searchNewFriend();
 
-    public ResponseListener addNewFriend(Person friend);
+    public ResponseListener<Person> addNewFriend();
 
-    public ResponseListener removeFriend();
+    public ResponseListener<String> removeFriend();
 
 }
