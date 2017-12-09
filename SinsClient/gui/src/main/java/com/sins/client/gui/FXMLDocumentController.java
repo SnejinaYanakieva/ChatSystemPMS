@@ -20,7 +20,7 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane bodyPane, userPane, friendsPane, settingsPane;
     
     @FXML
-    private void handleButtonAction(MouseEvent event)
+    private void handleButtonAction(ActionEvent event)
     {
         if(event.getTarget() == userButton)
         {

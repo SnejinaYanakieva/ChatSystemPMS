@@ -2,6 +2,7 @@ package com.sins.client.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,7 +36,7 @@ public class LoginFXMLController implements Initializable {
     private CheckBox log_checkbox;
     
     @FXML
-    private void handleButtonAction(MouseEvent event)
+    private void handleButtonAction(ActionEvent event)
     {
         if(event.getTarget() == reg_btn)
         {
@@ -69,7 +70,7 @@ public class LoginFXMLController implements Initializable {
     }
     
     @FXML
-    private void handleHyperlinkAction(MouseEvent event)
+    private void handleHyperlinkAction(ActionEvent event)
     {
         if(event.getTarget() == reg_hlink)
         {

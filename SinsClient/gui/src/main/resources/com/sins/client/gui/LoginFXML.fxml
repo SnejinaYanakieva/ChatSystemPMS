@@ -39,7 +39,7 @@
                         <Image url="@images/password.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="log_btn" layoutX="220.0" layoutY="99.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="68.0" prefWidth="90.0" text="Login" textAlignment="CENTER">
+                  <Button fx:id="log_btn" layoutX="220.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="68.0" prefWidth="90.0" text="Login" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
@@ -69,7 +69,7 @@
                         <Image url="@images/password.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="reg_btn" layoutX="176.0" layoutY="225.0" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="30.0" prefWidth="76.0" text="Register" textAlignment="CENTER">
+                  <Button fx:id="reg_btn" layoutX="176.0" layoutY="225.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="76.0" text="Register" textAlignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -86,7 +86,7 @@
                      </image>
                   </ImageView>
                   <PasswordField fx:id="reg_repass_txt" layoutX="102.0" layoutY="184.0" promptText="repeat password" />
-                  <Hyperlink fx:id="reg_hlink" layoutX="67.0" layoutY="230.0" onMouseClicked="#handleHyperlinkAction" text="Log in" />
+                  <Hyperlink fx:id="reg_hlink" layoutX="67.0" layoutY="230.0" onAction="#handleHyperlinkAction" text="Log in" />
                </children>
                <effect>
                   <ColorAdjust />
