@@ -6,6 +6,7 @@
 package com.sins.server.server;
 
 import com.sins.server.resolver.Resolver;
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import static java.lang.String.format;
@@ -59,6 +60,10 @@ public class ServerEndpoint {
          
             sendMessage(session, jsonResponse);
         }
+    }
+    
+       @OnMessage
+    public void onMessage(File message, Session session) throws IOException, EncodeException {
     }
 
     @OnClose
