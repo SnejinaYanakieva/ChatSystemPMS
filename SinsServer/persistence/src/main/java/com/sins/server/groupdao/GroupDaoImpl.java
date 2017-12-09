@@ -33,5 +33,10 @@ public class GroupDaoImpl implements GroupDao {
     public boolean deleteGroup(int groupid) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public Group getGroupById(String groupId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

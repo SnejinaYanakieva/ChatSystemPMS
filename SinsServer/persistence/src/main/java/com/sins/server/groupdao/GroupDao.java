@@ -12,5 +12,6 @@ public interface GroupDao {
     Group removeFriendFromGroup(int friendid,int groupid);
     List<ChatClient> getAllGroupParticipants(int groupid);
     boolean deleteGroup(int groupid);
+    Group getGroupById(String groupId);
     
 }

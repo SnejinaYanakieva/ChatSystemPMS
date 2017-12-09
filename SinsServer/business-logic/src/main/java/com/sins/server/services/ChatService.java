@@ -5,6 +5,11 @@
  */
 package com.sins.server.services;
 
+import com.sins.server.model.Group;
+import com.sins.server.model.Person;
+import com.sins.server.persistence.DbException;
+import com.sins.server.persistence.Store;
+import java.math.BigDecimal;
 import static java.util.Collections.list;
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +25,25 @@ public class ChatService {
 
     private Map<String, JsonObject> response = new HashMap<>();
 
-    Map<String, JsonObject> sendMessageToFriend(String receiverId, String message) {
+    Map<String, JsonObject> sendMessageToFriend(String receiverId, String userid, String message) {
 
         JsonObject json = Json
                 .createObjectBuilder()
                 .add("success", true)
+                .add("senderid", userid)
+                .add("message", message)
+                .build();
+
+        response.put(receiverId, json);
+        return response;
+    }
+
+    Map<String, JsonObject> sendFileToFriend(String receiverId, String userid, String message) {
+
+        JsonObject json = Json
+                .createObjectBuilder()
+                .add("success", true)
+                .add("senderid", userid)
                 .add("message", message)
                 .build();
 
@@ -55,17 +74,24 @@ public class ChatService {
         return response;
     }
 
-    Map<String, JsonObject> sendMessageToGroup(String userId, List<String> friendIds, String message) {
-        for (String friendId : friendIds) {
-            JsonObject json = Json
-                    .createObjectBuilder()
-                    .add("success", true)
-                    .add("senderid", userId)
-                    .add("message", message)
-                    .build();
-
-            response.put(friendId, json);
-        }
+    Map<String, JsonObject> sendMessageToGroup(String userId, String groupId, String message) {
+//        try {
+//            Group group = Store.Instance.getGroupDao().getGroupById(groupId);
+//        }
+//        catch(DbException ex){
+//            
+//        }
+//        for (Person friend : group.getParticipants()) {
+//            JsonObject json = Json
+//                    .createObjectBuilder()
+//                    .add("success", true)
+//                    .add("groupid", group.getId())
+//                    .add("senderid", userId)
+//                    .add("message", message)
+//                    .build();
+//
+//            response.put(friend.getId(), json);
+//        }
         return response;
     }
 }

@@ -70,7 +70,7 @@ public class Resolver {
        
     }
 
-    private void resolveFriendTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
+    private void resolveGroupTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
         switch (subtype) {
             case "createGroup":
@@ -84,7 +84,7 @@ public class Resolver {
             case "deleteGroup":
                 break;
             default:
-                String errorContent = "Requested USER type subtype not recognized!";
+                String errorContent = "Requested GROUP type subtype not recognized!";
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
@@ -112,7 +112,7 @@ public class Resolver {
        
     }
 
-    private void resolveGroupTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
+    private void resolveFriendTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
         switch (subtype) {
             case "getAllFriends":
@@ -124,7 +124,7 @@ public class Resolver {
             case "removeFriend":
                 break;
             default:
-                String errorContent = "Requested GROUP type subtype not recognized!";
+                String errorContent = "Requested FRIEND type subtype not recognized!";
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
