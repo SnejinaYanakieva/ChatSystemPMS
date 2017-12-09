@@ -5,7 +5,6 @@
  */
 package com.sins.client.resolver;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sins.client.client.Client;
 import com.sins.client.listener.registry.ChatListenerRegistry;
@@ -23,6 +22,10 @@ import com.sins.client.model.Person;
 import com.sins.client.model.message.ServerMessage;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import javax.json.JsonArray;
+import javax.json.JsonValue;
 
 /**
  *
@@ -303,7 +306,7 @@ public class ResolverClient {
         String subtype = json.getString("subtype");
         boolean success = json.getJsonObject("content").getBoolean("success");
         ChatClient chatClient;
-        List<Person> listFriends;
+        List<Person> listFriends = new ArrayList<>();
         Person newFriend;
         String serverResponse;
         switch (subtype) {
@@ -323,14 +326,11 @@ public class ResolverClient {
 
                 break;
             case "searchNewFriend":
-                //listFriends = (List<Person>) json.getJsonObject("content").getJsonObject("listSearchFriends");
                 if (success) {
-                    listFriends = mapper
-                            .readValue(json.getJsonObject("content")
-                                    .getJsonObject("friends")/// нз Снжина как го е именовала ????
-                                    .toString(),
-                                     new TypeReference<List<Person>>() {
-                            }); // Type Reference List<Person> ? Стискам палци да работи
+                    JsonArray arrayPersons = json.getJsonObject("content")
+                            .getJsonObject("friends").asJsonArray();/// нз Снжина как го е именовала ????
+                    listFriends = Arrays.asList(mapper.readValue(json.getJsonObject("content").getJsonArray("friends").toString(), Person[].class));
+
                     friendRegistry.searchNewFriend()
                             .onSuccess(listFriends);
                 } else {
@@ -345,7 +345,7 @@ public class ResolverClient {
                             .readValue(json.getJsonObject("content")
                                     .getJsonObject("friend")/// нз Снжина как го е именовала ????
                                     .toString(),
-                                     Person.class); // Type Reference List<Person> ? Стискам палци да работи
+                                    Person.class);
                     friendRegistry.addNewFriend()
                             .onSuccess(newFriend);
                 } else {
