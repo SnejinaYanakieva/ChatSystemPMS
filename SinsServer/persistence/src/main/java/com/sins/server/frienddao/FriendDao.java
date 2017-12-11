@@ -1,14 +1,18 @@
 package com.sins.server.frienddao;
 
 import com.sins.server.model.ChatClient;
+import com.sins.server.model.Group;
 import com.sins.server.model.Person;
+import com.sins.server.persistence.DbException;
 import java.util.List;
 
 public interface FriendDao {
     
-    ChatClient getAllFriends(String userid);
-    List<Person> searchNewFriend(String name);
-    Person addNewFriend(String id, String userid);
-    boolean removeFriend(String id, String userid);
+    ChatClient getAllFriendsAndGroups(String userid) throws DbException;
+    List<Person> searchNewFriend(String name) throws DbException;
+    Person addNewFriend(String id, String userid) throws DbException;
+    boolean removeFriend(String id, String userid) throws DbException;
+    List<Person> getListPerson(String list) throws DbException;
+    List<Group> getListGroup(String list) throws DbException;
     
 }

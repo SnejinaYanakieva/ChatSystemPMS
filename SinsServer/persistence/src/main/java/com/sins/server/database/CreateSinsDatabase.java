@@ -63,7 +63,7 @@ public class CreateSinsDatabase {
         String query = "CREATE TABLE IF NOT EXISTS GROUPS (\n"
                 + "	ID TEXT,\n"
                 + "	NAME TEXT NOT NULL,\n"
-                + "	OWNER_ID INTEGER NOT NULL, \n"
+                + "	OWNER_ID TEXT NOT NULL, \n"
                 + "     PARTICIPANT_LIST TEXT, \n"
                 + "     PRIMARY KEY (ID)\n"
                 + ");";
