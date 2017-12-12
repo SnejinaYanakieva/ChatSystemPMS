@@ -16,6 +16,7 @@ import javax.json.JsonObject;
 public class JsonBuilder {
 
    public static JsonBuilder INSTANCE = new JsonBuilder();
+  
     
     public JsonObject buildJson(JsonObject requestJson, boolean success, JsonObject content) {
         return Json
