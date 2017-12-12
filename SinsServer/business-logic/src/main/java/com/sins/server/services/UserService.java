@@ -8,6 +8,7 @@ package com.sins.server.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sins.server.bl.json.JsonBuilder;
 import com.sins.server.model.CurrentClient;
+import com.sins.server.model.Person;
 import com.sins.server.persistence.DbException;
 import com.sins.server.persistence.Store;
 import java.io.IOException;
@@ -15,8 +16,6 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -59,12 +58,12 @@ public class UserService {
     Map<String, JsonObject> login(String username, String password) {
         JsonObject json = null;
         try {
-            String clientId = Store.Instance.getUserDao().login(username, password);
+            Person clientId = Store.Instance.getUserDao().login(username, password);
             if (clientId != null) {
                 json = Json
                         .createObjectBuilder()
                         .add("success", true)
-                        .add("clientid", clientId)
+                        .add("clientid", clientId.getId())
                         .build();
             } else {
                 json = JsonBuilder.INSTANCE.buildErrorJsonConent("Login failed! Try again later.");
