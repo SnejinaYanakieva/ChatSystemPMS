@@ -15,7 +15,6 @@ import java.util.List;
 public class FriendDaoImpl implements FriendDao {
     
   
-    @Override
     public List<Person> getListPerson(String list) {
         
         List<Person> friendList = new ArrayList<Person>();
@@ -48,7 +47,6 @@ public class FriendDaoImpl implements FriendDao {
         }
     }
     
-    @Override
     public List<Group> getListGroup(String list) {
         
         List<Group> groupList = new ArrayList<Group>();

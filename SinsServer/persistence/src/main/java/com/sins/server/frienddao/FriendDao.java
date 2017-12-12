@@ -12,7 +12,5 @@ public interface FriendDao {
     List<Person> searchNewFriend(String name) throws DbException;
     Person addNewFriend(String id, String userid) throws DbException;
     boolean removeFriend(String id, String userid) throws DbException;
-    List<Person> getListPerson(String list) throws DbException;
-    List<Group> getListGroup(String list) throws DbException;
     
 }
