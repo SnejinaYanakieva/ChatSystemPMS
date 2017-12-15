@@ -15,11 +15,18 @@ import com.sins.client.model.Group;
  */
 public class GroupListenerRegistryImpl implements GroupListenerRegistry{
 
+    
+
     @Override
-    public ResponseListener createGroup(Group friend) {
-        return new ResponseListener() {
+    public ResponseListener deleteGroup() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ResponseListener<Group> createGroup() {
+          return new ResponseListener<Group>() {
             @Override
-            public void onSuccess(Object response) {
+            public void onSuccess(Group response) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
@@ -31,17 +38,12 @@ public class GroupListenerRegistryImpl implements GroupListenerRegistry{
     }
 
     @Override
-    public ResponseListener addFriendToGroup(Group friend) {
+    public ResponseListener<Group> addFriendToGroup() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ResponseListener removeFriendFromGroup(String serverResponse) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ResponseListener deleteGroup() {
+    public ResponseListener<Group> removeFriendFromGroup() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

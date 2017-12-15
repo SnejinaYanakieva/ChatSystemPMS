@@ -25,7 +25,7 @@ public class ChatService {
 
     private Map<String, JsonObject> response = new HashMap<>();
 
-    Map<String, JsonObject> sendMessageToFriend(String receiverId, String userid, String message) {
+    public Map<String, JsonObject> sendMessageToFriend(String receiverId, String userid, String message) {
 
         JsonObject json = Json
                 .createObjectBuilder()
@@ -38,7 +38,7 @@ public class ChatService {
         return response;
     }
 
-    Map<String, JsonObject> sendFileToFriend(String receiverId, String userid, String message) {
+    public Map<String, JsonObject> sendFileToFriend(String receiverId, String userid, String message) {
 
         JsonObject json = Json
                 .createObjectBuilder()
@@ -51,7 +51,7 @@ public class ChatService {
         return response;
     }
 
-    Map<String, JsonObject> sendFileAcceptRequest(String userId, String friendId) {
+    public Map<String, JsonObject> sendFileAcceptRequest(String userId, String friendId) {
         JsonObject json = Json
                 .createObjectBuilder()
                 .add("success", true)
@@ -62,7 +62,7 @@ public class ChatService {
         return response;
     }
 
-    Map<String, JsonObject> sendFileAcceptResponse(String userId, String friendId, boolean accepted) {
+    public Map<String, JsonObject> sendFileAcceptResponse(String userId, String friendId, boolean accepted) {
         JsonObject json = Json
                 .createObjectBuilder()
                 .add("success", true)
@@ -74,7 +74,7 @@ public class ChatService {
         return response;
     }
 
-    Map<String, JsonObject> sendMessageToGroup(String userId, String groupId, String message) {
+    public Map<String, JsonObject> sendMessageToGroup(String userId, String groupId, String message) {
 //        try {
 //            Group group = Store.Instance.getGroupDao().getGroupById(groupId);
 //        }

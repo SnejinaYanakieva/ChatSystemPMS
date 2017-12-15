@@ -28,7 +28,7 @@ public class UserService {
 
     private Map<String, JsonObject> response = new HashMap<>();
 
-    Map<String, JsonObject> register(CurrentClient user, String password) {
+    public Map<String, JsonObject> register(CurrentClient user, String password) {
         List<String> errrors = user.validateItem();
         JsonObject json = null;
         if (errrors.isEmpty()) {
@@ -55,7 +55,7 @@ public class UserService {
         return response;
     }
 
-    Map<String, JsonObject> login(String username, String password) {
+    public Map<String, JsonObject> login(String username, String password) {
         JsonObject json = null;
         try {
             Person clientId = Store.Instance.getUserDao().login(username, password);
@@ -76,7 +76,7 @@ public class UserService {
         return response;
     }
 
-    Map<String, JsonObject> readPersonalInfo(String userId) {
+    public Map<String, JsonObject> readPersonalInfo(String userId) {
         JsonObject json = null;
         try {
             CurrentClient client = Store.Instance.getUserDao().readPersonalInfo(userId);
@@ -104,7 +104,7 @@ public class UserService {
         return response;
     }
 
-    Map<String, JsonObject> updatePersonalInfo(String userId, CurrentClient info) {
+    public Map<String, JsonObject> updatePersonalInfo(String userId, CurrentClient info) {
         List<String> errrors = info.validateItem();
         JsonObject json = null;
         if (errrors.isEmpty()) {
@@ -135,7 +135,7 @@ public class UserService {
         return response;
     }
     
-      Map<String, JsonObject> logout(String userId) {
+      public Map<String, JsonObject> logout(String userId) {
         JsonObject json = null;
             try {
                 Boolean success = Store.Instance.getUserDao().logout(userId);
@@ -152,7 +152,7 @@ public class UserService {
         return response;
     }
       
-       Map<String, JsonObject> deleteUser(String userId) {
+       public Map<String, JsonObject> deleteUser(String userId) {
         JsonObject json = null;
             try {
                 Boolean success = Store.Instance.getUserDao().deleteUser(userId);

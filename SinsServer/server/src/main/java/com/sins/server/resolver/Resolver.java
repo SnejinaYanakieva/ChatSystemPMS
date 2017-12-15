@@ -5,8 +5,12 @@
  */
 package com.sins.server.resolver;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sins.server.bl.json.JsonBuilder;
+import com.sins.server.model.CurrentClient;
 import com.sins.server.server.ServerEndpoint;
+import com.sins.server.services.ChatService;
+import com.sins.server.services.UserService;
 import java.util.HashMap;
 import java.util.Map;
 import javax.json.JsonObject;
@@ -19,6 +23,9 @@ import javax.websocket.Session;
 public class Resolver {
 
     public static final Resolver INSTANCE = new Resolver();
+    private ObjectMapper mapper = new ObjectMapper();
+    Map<String, JsonObject> responseContext;
+    JsonObject content;
 
     public Map<String, JsonObject> resolve(JsonObject json, Session session) {
         HashMap<String, JsonObject> responseMap = new HashMap<String, JsonObject>();
@@ -41,33 +48,60 @@ public class Resolver {
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
-       return responseMap;
+        return responseMap;
     }
 
     private void resolveUserTypeRequests(JsonObject json, Session session, Map<String, JsonObject> responseMap) {
+        UserService service = new UserService();
+
         String subtype = json.getString("subtype");
-        switch (subtype) {
-            case "register":
-                ServerEndpoint.peers.put(json.getString("clientid"), session);
-                System.out.println(json.getJsonObject("content").toString());
-                responseMap.put(json.getString("clientid"), JsonBuilder.INSTANCE.buildErrorJson(json, json.getJsonObject("content").toString()));
-                break;
-            case "login":
-                break;
-            case "readPersonalInfo":
-                break;
-            case "updatePersonalInfo":
-                break;
-            case "logout":
-                break;
-            case "deleteUser":
-                break;
-            default:
-                String errorContent = "Requested USER type subtype not recognized!";
-                JsonObject response =JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
-                responseMap.put(json.getString("clientId"), response);
+        try {
+            switch (subtype) {
+                case "register":
+                    content = json.getJsonObject("content");
+                    CurrentClient currenClient = mapper
+                            .readValue(json.getJsonObject("content")
+                                    .getJsonObject("currentClient")
+                                    .toString(),
+                                    CurrentClient.class);
+                    String password = content.getString("password");
+                    responseContext = service.register(currenClient, password);
+                    for (String id : responseContext.keySet()) {
+                        responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                    }
+                    break;
+
+                case "login":
+                    content = json.getJsonObject("content");
+                    String username = content.getString("username");
+                    String pass = content.getString("password");
+                    responseContext = service.login(username, pass);
+                    for (String id : responseContext.keySet()) {
+                        responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                        ServerEndpoint.peers.put(id, session);
+                    }
+
+                    break;
+                case "readPersonalInfo":
+                    break;
+                case "updatePersonalInfo":
+                    break;
+                case "logout":
+                    break;
+                case "deleteUser":
+                    break;
+                default:
+                    String errorContent = "Requested USER type subtype not recognized!";
+                    JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
+                    responseMap.put(json.getString("clientId"), response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            String errorContent = "Server could not execute your request!";
+            JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
+            responseMap.put(json.getString("clientId"), response);
         }
-       
+
     }
 
     private void resolveGroupTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
@@ -88,13 +122,22 @@ public class Resolver {
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
-       
+
     }
 
     private void resolveChatTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
+        ChatService service = new ChatService();
         switch (subtype) {
             case "sendMessageToFriend":
+                content = json.getJsonObject("content");
+                String userid = content.getString("userid");
+                String receiverid = content.getString("receiverid");
+                String message = content.getString("message");
+                responseContext = service.sendMessageToFriend(receiverid, userid, message);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             case "sendFileAcceptRequest":
                 break;
@@ -109,7 +152,7 @@ public class Resolver {
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
-       
+
     }
 
     private void resolveFriendTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
@@ -128,7 +171,7 @@ public class Resolver {
                 JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
                 responseMap.put(json.getString("clientId"), response);
         }
-       
+
     }
 
 }

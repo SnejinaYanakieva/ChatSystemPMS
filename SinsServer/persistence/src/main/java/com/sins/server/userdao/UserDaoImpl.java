@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.UUID;
 
 
 public class UserDaoImpl implements UserDao {
@@ -19,7 +20,7 @@ public class UserDaoImpl implements UserDao {
         
         try (Connection conn = Store.Instance.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, Integer.parseInt(curClient.getId()));
+            pstmt.setString(1, UUID.randomUUID().toString());
             pstmt.setString(2, curClient.getNickname());
             pstmt.setString(3, password);
             pstmt.executeUpdate();
