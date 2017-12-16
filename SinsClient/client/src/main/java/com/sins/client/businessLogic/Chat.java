@@ -26,7 +26,7 @@ public class Chat {
     public void sendMessageToFriend(String recieverID, String message) throws IOException {
         JsonObject jsonContent = Json
                 .createObjectBuilder()
-                .add("friendID", recieverID)
+                .add("receiverid", recieverID)
                 .add("message", message)
                 .build();
 
@@ -39,11 +39,11 @@ public class Chat {
                 .build();
         ClientEnd.sendMessage(json);
         // добавяне на съобщение в файл, history;
-          chatHistoryWriter = new PrintWriter("../webapp/target/ChatWith"+recieverID+".txt", "UTF-8");
+/*          chatHistoryWriter = new PrintWriter("../webapp/target/ChatWith"+recieverID+".txt", "UTF-8");
           chatHistoryWriter.append("Send to :" + recieverID + "\n");  
           chatHistoryWriter.append(message);
 
-           chatHistoryWriter.close();
+           chatHistoryWriter.close();*/
     }
 
     public void sendFileAcceptRequest(String recieverID) throws IOException {

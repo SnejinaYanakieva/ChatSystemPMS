@@ -6,6 +6,7 @@
 package com.sins.client.resolver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sins.client.businessLogic.Chat;
 import com.sins.client.client.Client;
 import com.sins.client.listener.registry.ChatListenerRegistry;
 import com.sins.client.listener.registry.FriendListenerRegistry;
@@ -95,6 +96,9 @@ public class ResolverClient {
                   Client.userID = json.getJsonObject("content").getString("clientid");
                   /*   userRegistry.getLoginListener()
                             .onSuccess("Successfully loggedin");*/
+                  if(Client.userID.equals("6210b090-9043-4252-9cdc-15be424c5a22")){
+                  new Chat().sendMessageToFriend("ff2b17ab-cc87-402e-a974-7555998bc653","Zdr!"); 
+                  }// --изпращам на userSINS2
                     System.out.println("Successfully LOGEDIN !");
                 } else {
                     userRegistry.getLoginListener()
@@ -233,7 +237,7 @@ public class ResolverClient {
                     senderID = json.getJsonObject("content")
                             .getJsonObject("senderid")
                             .toString();
-
+                    System.out.println("Message from " + senderID + " Message : "+message+"\n");
                     chatRegistry.getMessageFromFriend()
                             .onSuccess(new ServerMessage<String>(senderID, message));
                 } else {
@@ -241,10 +245,10 @@ public class ResolverClient {
                             .onError(json.getJsonObject("content").getString("errorMessage"));
                 }
                 // добавяне на съобщение в файл, history;
-                chatHistoryWriter = new PrintWriter("../webapp/target/ChatWith" + senderID + ".txt", "UTF-8");
+              /*  chatHistoryWriter = new PrintWriter("../webapp/target/ChatWith" + senderID + ".txt", "UTF-8");
                 chatHistoryWriter.append("Message from :" + senderID + "\n");
                 chatHistoryWriter.append(message);
-                chatHistoryWriter.close();
+                chatHistoryWriter.close();*/
                 break;
             case "recieveFileAcceptRequest":
 
