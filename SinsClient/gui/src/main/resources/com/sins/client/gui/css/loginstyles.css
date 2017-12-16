@@ -21,6 +21,7 @@
     -fx-border-color: black;
     -fx-border-width: 0 0 1 0;
     -fx-underline: true;
+    -fx-prompt-text-fill: #808080   ;
 }
 
 .text-field:focused {
@@ -29,7 +30,7 @@
 }
 
 .button {
-    -fx-text-fill: white;
+    -fx-text-fill: ghostwhite  ;
     -fx-font-family: "Verdana";
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(lightgreen, darkseagreen);

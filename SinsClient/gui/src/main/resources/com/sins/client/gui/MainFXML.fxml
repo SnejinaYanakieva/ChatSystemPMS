@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="900.0" styleClass="chatPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sins.client.gui.MainFXMLController">
-    <stylesheets>
-        <URL value="@css/mainfxml.css" />
-    </stylesheets>
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="900.0" styleClass="chatPane" stylesheets="@css/mainstyles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sins.client.gui.MainFXMLController">
    <children>
-      <AnchorPane id="anchorPaneBar" prefHeight="30.0" prefWidth="900.0" styleClass="main" stylesheets="@css/mainfxml.css">
-         <children>
-            <Hyperlink id="hyperlink" fx:id="logout_hlink" layoutY="1.0" onAction="#handleHyperlinkAction" stylesheets="@css/mainfxml.css" text="Logout" />
-         </children></AnchorPane>
-      <AnchorPane id="anchorPaneUser" layoutY="30.0" prefHeight="520.0" prefWidth="300.0" styleClass="userPane" stylesheets="@css/mainfxml.css">
+      <AnchorPane id="anchorPaneUser" layoutY="30.0" prefHeight="520.0" prefWidth="300.0" styleClass="userPane" stylesheets="@css/mainstyles.css">
          <children>
             <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,28 +21,48 @@
                </image></ImageView>
             <Label layoutX="110.0" layoutY="10.0" prefHeight="20.0" prefWidth="180.0" text="User Name" />
             <Text layoutX="110.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <TabPane layoutY="170.0" prefHeight="350.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="256.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/add.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/home.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="75.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/search.png" />
+               </image>
+            </ImageView>
+            <TextField layoutX="97.0" layoutY="139.0" prefHeight="26.0" prefWidth="130.0" promptText="Search:" stylesheets="@css/mainstyles.css" />
+            <TabPane layoutY="170.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Friends">
+                <Tab text="     Friends     ">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <ListView prefHeight="290.0" prefWidth="300.0" />
+                              <ListView fx:id="listViewFriends" fixedCellSize="0.0" prefHeight="300.0" prefWidth="300.0" />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Conversations">
+                <Tab text="     Conversations     ">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ListView prefHeight="290.0" prefWidth="300.0" />
+                              <ListView fx:id="listViewConversations" prefHeight="300.0" prefWidth="300.0" />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
               </tabs>
             </TabPane>
+         </children></AnchorPane>
+      <AnchorPane id="anchorPaneBar" prefHeight="30.0" prefWidth="900.0" styleClass="main" stylesheets="@css/mainstyles.css">
+         <children>
+            <Hyperlink id="hyperlink" fx:id="logout_hlink" layoutY="1.0" onAction="#handleHyperlinkAction" stylesheets="@css/mainstyles.css" text="Logout" />
          </children></AnchorPane>
    </children>
 </AnchorPane>
