@@ -78,7 +78,7 @@ public class CreateSinsDatabase {
 
     public static void main(String[] args) throws Exception {
 
-        createConnection();
+        conn = createConnection();
         createTableUSERS();
         createTableUSER_PERSONAL_INFO();
         createTableGROUPS();
