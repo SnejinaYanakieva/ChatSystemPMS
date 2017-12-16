@@ -1,0 +1,49 @@
+.introPane{
+    -fx-background-color: palegoldenrod ;
+}
+
+.loginPane {
+    -fx-background-color: lightsalmon  ;
+}
+
+#text {
+   -fx-font-size: 32px;
+   -fx-font-family: "Verdana";
+   -fx-fill: firebrick;
+   -fx-font-weight: bold;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+   -fx-effect: dropshadow( gaussian , rgba(110,110,110,0.55) , 1,1,1,2 );
+}
+
+.text-field {
+    -fx-background-color: lightsalmon;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 1 0;
+    -fx-underline: true;
+}
+
+.text-field:focused {
+    -fx-background-color: lightsalmon;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Verdana";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(lightgreen, darkseagreen);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(darkseagreen , mediumseagreen );
+}
+
+#login {
+    -fx-font-size:15 em;
+}
+
+#register {
+    -fx-font-size:12 em;
+}

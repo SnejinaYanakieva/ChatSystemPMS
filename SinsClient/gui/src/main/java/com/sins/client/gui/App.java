@@ -8,10 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-/**
- * Hello world!
- *
- */
 public class App extends Application
 {
 
@@ -24,6 +20,7 @@ public class App extends Application
         
         //Scene scene = new Scene(root, Color.rgb(0, 0, 0, 0)); // sets transparent background x1 (x2 is in fxml)
         
+        primaryStage.setTitle("SINS - Login");
         Scene scene = new Scene(root);
         
         primaryStage.setScene(scene);

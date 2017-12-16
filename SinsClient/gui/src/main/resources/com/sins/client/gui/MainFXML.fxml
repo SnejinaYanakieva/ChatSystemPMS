@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="900.0" styleClass="chatPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sins.client.gui.MainFXMLController">
+    <stylesheets>
+        <URL value="@css/mainfxml.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane id="anchorPaneBar" prefHeight="30.0" prefWidth="900.0" styleClass="main" stylesheets="@css/mainfxml.css">
+         <children>
+            <Hyperlink id="hyperlink" fx:id="logout_hlink" layoutY="1.0" onAction="#handleHyperlinkAction" stylesheets="@css/mainfxml.css" text="Logout" />
+         </children></AnchorPane>
+      <AnchorPane id="anchorPaneUser" layoutY="30.0" prefHeight="520.0" prefWidth="300.0" styleClass="userPane" stylesheets="@css/mainfxml.css">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/account.png" />
+               </image></ImageView>
+            <Label layoutX="110.0" layoutY="10.0" prefHeight="20.0" prefWidth="180.0" text="User Name" />
+            <Text layoutX="110.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <TabPane layoutY="170.0" prefHeight="350.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Friends">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView prefHeight="290.0" prefWidth="300.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Conversations">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <ListView prefHeight="290.0" prefWidth="300.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,11 +1,13 @@
 package com.sins.client.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -47,24 +49,19 @@ public class LoginFXMLController implements Initializable {
             log_pane.setManaged(true);
         }
         if(event.getTarget() == log_btn)
-        {
-            log_pane.setVisible(false);
-            log_pane.setManaged(false);
-            
-            reg_pane.setVisible(true);
-            reg_pane.setManaged(true);
-            
-            try{
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLDocumentController"));
-                Parent root1 = (Parent) fxmlLoader.load();
+        {         
+            Parent root;
+            try {
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("com/sins/client/gui/MainFXML.fxml"));
                 Stage stage = new Stage();
-                
-                stage.setTitle("Testing");
-                stage.setScene(new Scene(root1));
+                stage.setTitle("Welcome to SINS - The Best Chat Platform Available.");
+                stage.setScene(new Scene(root));
                 stage.show();
-                
-            }catch (Exception e){
-                System.out.println("Can't load new window");
+                // Hide this current window (if this is what you want)
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -74,7 +71,6 @@ public class LoginFXMLController implements Initializable {
     {
         if(event.getTarget() == reg_hlink)
         {
-            System.out.println( "aaaa" );
             reg_pane.setVisible(false);
             reg_pane.setManaged(false);
             
@@ -83,7 +79,6 @@ public class LoginFXMLController implements Initializable {
         }
         if(event.getTarget() == log_hlink)
         {
-            System.out.println( "bbbb" );
             log_pane.setVisible(false);
             log_pane.setManaged(false);
             

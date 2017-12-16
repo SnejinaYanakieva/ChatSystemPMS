@@ -1,0 +1,25 @@
+.main {
+    -fx-background-color: #808080;
+}
+
+.userPane {
+    -fx-background-color: lightsalmon ;
+}
+
+.chatPane {
+    -fx-background-color: palegoldenrod ;
+}
+
+.hyperlink {
+    -fx-background-color: lightsalmon ;
+    -fx-text-fill: ghostwhite;
+    -fx-padding: 5px 5px;
+    -fx-text-align: center;
+    -fx-text-decoration: none;
+    -fx-display: inline-block;
+}
+
+
+.hyperlink:hover, hyperlink:active {
+        -fx-background-color: palegreen;
+}
