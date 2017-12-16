@@ -8,13 +8,13 @@ package com.sins.server.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sins.server.bl.json.JsonBuilder;
 import com.sins.server.model.ChatClient;
-import com.sins.server.model.CurrentClient;
-import com.sins.server.model.Group;
+import com.sins.server.model.Person;
 import com.sins.server.persistence.DbException;
 import com.sins.server.persistence.Store;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -51,6 +51,34 @@ public class FriendService {
 
         } catch (IOException ex) {
             json = JsonBuilder.INSTANCE.buildErrorJsonConent("Friends and groups info could not be red.");
+        }
+        response.put(userId, json);
+        return response;
+    }
+    
+     public Map<String, JsonObject> searchNewFriend(String name, String userId) {
+        JsonObject json = null;
+        try {
+            List<Person> clients = Store.Instance.getFriendDao().searchNewFriend(name, userId);
+            if (clients != null) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                String jsonInString = objectMapper.writeValueAsString(clients);
+                JsonReader jsonReader = Json.createReader(new StringReader(jsonInString));
+                JsonObject jsonMessage = jsonReader.readObject();
+                //convert json string to object
+                json = Json
+                        .createObjectBuilder()
+                        .add("success", true)
+                        .add("clients", jsonMessage)
+                        .build();
+            } else {
+                json = JsonBuilder.INSTANCE.buildErrorJsonConent("Clients info could not be red.");
+            }
+        } catch (DbException e) {
+            json = JsonBuilder.INSTANCE.buildErrorJsonConent(e.getDbErrorMessage());
+
+        } catch (IOException ex) {
+            json = JsonBuilder.INSTANCE.buildErrorJsonConent("Clients info could not be red.");
         }
         response.put(userId, json);
         return response;

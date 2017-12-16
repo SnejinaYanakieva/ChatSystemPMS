@@ -85,7 +85,7 @@ public class Resolver {
                     break;
                 case "readPersonalInfo":
                     content = json.getJsonObject("content");
-                    String clientid = content.getString("clientid");
+                    String clientid = json.getString("clientid");
                     responseContext = service.readPersonalInfo(clientid);
                     for (String id : responseContext.keySet()) {
                         responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
@@ -94,7 +94,7 @@ public class Resolver {
                     break;
                 case "updatePersonalInfo":
                     content = json.getJsonObject("content");
-                    String clientId = content.getString("clientid");
+                    String clientId = json.getString("clientid");
                     CurrentClient info = mapper
                             .readValue(json.getJsonObject("content")
                                     .getJsonObject("currentClient")
@@ -108,7 +108,7 @@ public class Resolver {
                     break;
                 case "logout":
                     content = json.getJsonObject("content");
-                    String client = content.getString("clientid");
+                    String client = json.getString("clientid");
                     responseContext = service.logout(client);
                     for (String id : responseContext.keySet()) {
                         responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
@@ -188,13 +188,20 @@ public class Resolver {
         switch (subtype) {
             case "getAllFriends":
                 content = json.getJsonObject("content");
-                String clientid = content.getString("clientid");
+                String clientid = json.getString("clientid");
                 responseContext = service.getAllFriendsAndGroups(clientid);
                 for (String id : responseContext.keySet()) {
                     responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
                 }
                 break;
             case "searchNewFriend":
+                content = json.getJsonObject("content");
+                String client = json.getString("clientid");
+                String searchName = content.getString("name");
+                responseContext = service.searchNewFriend(searchName, client);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             case "addNewFriend":
                 break;

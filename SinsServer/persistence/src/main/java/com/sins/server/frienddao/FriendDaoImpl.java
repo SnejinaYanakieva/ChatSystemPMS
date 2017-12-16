@@ -111,7 +111,7 @@ public class FriendDaoImpl implements FriendDao {
     }
     
     @Override
-    public List searchNewFriend(String name) {
+    public List searchNewFriend(String name, String userid) {
         throw new UnsupportedOperationException();
     }
     
