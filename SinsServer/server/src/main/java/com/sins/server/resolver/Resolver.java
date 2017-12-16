@@ -83,13 +83,39 @@ public class Resolver {
 
                     break;
                 case "readPersonalInfo":
+                    content = json.getJsonObject("content");
+                    String clientid = content.getString("clientid");
+                    responseContext = service.readPersonalInfo(clientid);
+                    for (String id : responseContext.keySet()) {
+                        responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                        ServerEndpoint.peers.put(id, session);
+                    }
                     break;
                 case "updatePersonalInfo":
+                    content = json.getJsonObject("content");
+                    String clientId = content.getString("clientid");
+                    CurrentClient info = mapper
+                            .readValue(json.getJsonObject("content")
+                                    .getJsonObject("currentClient")
+                                    .toString(),
+                                    CurrentClient.class);
+                    responseContext = service.updatePersonalInfo(clientId, info);
+                    for (String id : responseContext.keySet()) {
+                        responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                        ServerEndpoint.peers.put(id, session);
+                    }
                     break;
                 case "logout":
+                    content = json.getJsonObject("content");
+                    String client = content.getString("clientid");
+                    responseContext = service.logout(client);
+                    for (String id : responseContext.keySet()) {
+                        responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                        ServerEndpoint.peers.put(id, session);
+                    }
                     break;
                 case "deleteUser":
-                    break;
+                    throw new UnsupportedOperationException();
                 default:
                     String errorContent = "Requested USER type subtype not recognized!";
                     JsonObject response = JsonBuilder.INSTANCE.buildErrorJson(json, errorContent);
