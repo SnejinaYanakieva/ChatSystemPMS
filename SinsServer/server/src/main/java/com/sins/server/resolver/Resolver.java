@@ -80,8 +80,8 @@ public class Resolver {
                     String pass = content.getString("password");
                     responseContext = service.login(username, pass);
                     for (String id : responseContext.keySet()) {
-                        responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
-                        ServerEndpoint.peers.put(id, session);
+                         ServerEndpoint.sendMessage(session, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                        ServerEndpoint.peers.put(responseContext.get(id).getString("clientid"), session);
                     }
 
                     break;

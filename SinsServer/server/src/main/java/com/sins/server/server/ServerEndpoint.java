@@ -57,8 +57,8 @@ public class ServerEndpoint {
                     .add("content", Json
                             .createObjectBuilder()
                             .add("errorMessage", "Server could not process your request!")
+                            .add("success", false)
                             .build())
-                    .add("success", false)
                     .build();
             e.printStackTrace();
             sendMessage(session, jsonResponse);
