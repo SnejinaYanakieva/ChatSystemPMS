@@ -11,6 +11,7 @@ import com.sins.server.model.CurrentClient;
 import com.sins.server.server.ServerEndpoint;
 import com.sins.server.services.ChatService;
 import com.sins.server.services.FriendService;
+import com.sins.server.services.GroupService;
 import com.sins.server.services.UserService;
 import java.util.HashMap;
 import java.util.Map;
@@ -133,12 +134,37 @@ public class Resolver {
 
     private void resolveGroupTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
+        String clientid;
+        GroupService service = new GroupService();
         switch (subtype) {
             case "createGroup":
+                content = json.getJsonObject("content");
+                clientid = json.getString("clientid");
+                String groupName = content.getString("groupName");
+                responseContext = service.createGroup(groupName, clientid);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             case "addFriendToGroup":
+                 content = json.getJsonObject("content");
+                clientid = json.getString("clientid");
+                String groupid = content.getString("groupID");
+                String friendid = content.getString("friendID");
+                responseContext = service.addFriendToGroup(friendid, groupid, clientid);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             case "removeFriendFromGroup":
+                content = json.getJsonObject("content");
+                clientid = json.getString("clientid");
+                String groupId = content.getString("groupID");
+                String friendId = content.getString("friendID");
+                responseContext = service.removeFriendFromGroup(friendId, groupId, clientid);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             case "getAllGroupParticipants":
                 break;

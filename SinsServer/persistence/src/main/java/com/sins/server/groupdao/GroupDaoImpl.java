@@ -15,22 +15,22 @@ public class GroupDaoImpl implements GroupDao {
     }
 
     @Override
-    public Group addFriendToGroup(int friendid, int groupid) {
+    public Group addFriendToGroup(String friendid, String groupid) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Group removeFriendFromGroup(int friendid, int groupid) {
+    public Group removeFriendFromGroup(String friendid, String groupid) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<ChatClient> getAllGroupParticipants(int groupid) {
+    public List<ChatClient> getAllGroupParticipants(String groupid) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean deleteGroup(int groupid) {
+    public boolean deleteGroup(String groupid) {
         throw new UnsupportedOperationException();
     }
 

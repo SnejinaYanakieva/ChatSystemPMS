@@ -75,23 +75,29 @@ public class ChatService {
         return response;
     }
 
-   public Map<String, JsonObject> sendMessageToGroup(String userId, String groupId, String message) {
+    public Map<String, JsonObject> sendMessageToGroup(String userId, String groupId, String message) {
         try {
             Group group = Store.Instance.getGroupDao().getGroupById(groupId);
-            for (Person friend : group.getParticipants()) {
-                JsonObject json = Json
-                        .createObjectBuilder()
-                        .add("success", true)
-                        .add("groupid", group.getId())
-                        .add("senderid", userId)
-                        .add("message", message)
-                        .build();
+            if (group != null) {
+                for (Person friend : group.getParticipants()) {
+                    JsonObject json = Json
+                            .createObjectBuilder()
+                            .add("success", true)
+                            .add("groupid", group.getId())
+                            .add("senderid", userId)
+                            .add("message", message)
+                            .build();
 
-                response.put(friend.getId(), json);
+                    response.put(friend.getId(), json);
+                }
+
+            } else {
+               JsonObject json = JsonBuilder.INSTANCE.buildErrorJsonConent("Group does not exist.");
+               response.put(userId, json);
             }
         } catch (DbException ex) {
             JsonObject json = JsonBuilder.INSTANCE.buildErrorJsonConent(ex.getDbErrorMessage());
-             response.put(userId, json);
+            response.put(userId, json);
         }
         return response;
     }
