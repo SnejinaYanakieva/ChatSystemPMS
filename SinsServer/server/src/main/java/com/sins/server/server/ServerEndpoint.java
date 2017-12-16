@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import static java.lang.String.format;
+import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +34,7 @@ import javax.websocket.Session;
 public class ServerEndpoint {
 
     public static Map<String, Session> peers = Collections.synchronizedMap(new HashMap<String, Session>());
+    public static Map<Session, String> filesTo = Collections.synchronizedMap(new HashMap<Session, String>());
 
     @OnOpen
     public void onOpen(Session session) {
@@ -64,7 +66,11 @@ public class ServerEndpoint {
     }
 
     @OnMessage
-    public void onMessage(File message, Session session) throws IOException, EncodeException {
+    public void onMessage(ByteBuffer message, Session session) throws IOException, EncodeException {
+        String receiverid = filesTo.get(session);
+        peers.get(receiverid).getBasicRemote().sendBinary(message);
+        filesTo.remove(session);
+
     }
 
     @OnClose

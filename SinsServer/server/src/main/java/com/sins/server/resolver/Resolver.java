@@ -15,6 +15,7 @@ import com.sins.server.services.GroupService;
 import com.sins.server.services.UserService;
 import java.util.HashMap;
 import java.util.Map;
+import javax.json.Json;
 import javax.json.JsonObject;
 import javax.websocket.Session;
 
@@ -43,7 +44,7 @@ public class Resolver {
                 resolveGroupTypeRequests(json, responseMap);
                 break;
             case "CHAT":
-                resolveChatTypeRequests(json, responseMap);
+                resolveChatTypeRequests(json, responseMap, session);
                 break;
             default:
                 String errorContent = "Requested type not recognized!";
@@ -147,7 +148,7 @@ public class Resolver {
                 }
                 break;
             case "addFriendToGroup":
-                 content = json.getJsonObject("content");
+                content = json.getJsonObject("content");
                 clientid = json.getString("clientid");
                 String groupid = content.getString("groupID");
                 String friendid = content.getString("friendID");
@@ -178,7 +179,7 @@ public class Resolver {
 
     }
 
-    private void resolveChatTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
+    private void resolveChatTypeRequests(JsonObject json, Map<String, JsonObject> responseMap, Session session) {
         String subtype = json.getString("subtype");
         ChatService service = new ChatService();
         String userid;
@@ -214,6 +215,15 @@ public class Resolver {
                 }
                 break;
             case "sendFileToFriend":
+                content = json.getJsonObject("content");
+                userid = json.getString("userid");
+                receiverid = content.getString("receiverid");
+                ServerEndpoint.filesTo.put(session, receiverid);
+                responseMap.put(userid, JsonBuilder.INSTANCE.buildJson(json, true, Json
+                        .createObjectBuilder()
+                        .add("success", true)
+                        .build()));
+
                 break;
             case "sendMessageToGroup":
                 content = json.getJsonObject("content");
