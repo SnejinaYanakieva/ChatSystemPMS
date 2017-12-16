@@ -197,7 +197,7 @@ public class Resolver {
             case "searchNewFriend":
                 content = json.getJsonObject("content");
                 String client = json.getString("clientid");
-                String searchName = content.getString("name");
+                String searchName = content.getString("friendName");
                 responseContext = service.searchNewFriend(searchName, client);
                 for (String id : responseContext.keySet()) {
                     responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
