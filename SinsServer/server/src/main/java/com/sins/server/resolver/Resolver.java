@@ -10,6 +10,7 @@ import com.sins.server.bl.json.JsonBuilder;
 import com.sins.server.model.CurrentClient;
 import com.sins.server.server.ServerEndpoint;
 import com.sins.server.services.ChatService;
+import com.sins.server.services.FriendService;
 import com.sins.server.services.UserService;
 import java.util.HashMap;
 import java.util.Map;
@@ -183,8 +184,15 @@ public class Resolver {
 
     private void resolveFriendTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
+        FriendService service = new FriendService();
         switch (subtype) {
             case "getAllFriends":
+                content = json.getJsonObject("content");
+                String clientid = content.getString("clientid");
+                responseContext = service.getAllFriendsAndGroups(clientid);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             case "searchNewFriend":
                 break;
