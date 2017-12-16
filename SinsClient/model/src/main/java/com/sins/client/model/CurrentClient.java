@@ -1,5 +1,6 @@
 package com.sins.client.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CurrentClient extends Person{
@@ -42,7 +43,7 @@ public class CurrentClient extends Person{
     }
     
     public List<String> validateItem() {
-        List<String> errors = null;
+        List<String> errors = new ArrayList<>();
         return errors;
     }
     

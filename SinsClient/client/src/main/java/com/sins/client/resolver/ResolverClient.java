@@ -81,18 +81,21 @@ public class ResolverClient {
             case "register":
 
                 if (success) {
-                    userRegistry.getRegisterListener()
-                            .onSuccess("Successfully registered");
+                   /*userRegistry.getRegisterListener()
+                            .onSuccess("Successfully registered");*/
+                    System.out.println("Successfully registred !");
                 } else {
                     userRegistry.getRegisterListener()
                             .onError(json.getJsonObject("content").getString("errorMessage"));
+                    System.out.println(json.getJsonObject("content").getString("errorMessage"));
                 }
                 break;
             case "login":
                 if (success) {
-                    Client.userID = json.getJsonObject("content").getString("clientid");
-                    userRegistry.getLoginListener()
-                            .onSuccess("Successfully loggedin");
+                  Client.userID = json.getJsonObject("content").getString("clientid");
+                  /*   userRegistry.getLoginListener()
+                            .onSuccess("Successfully loggedin");*/
+                    System.out.println("Successfully LOGEDIN !");
                 } else {
                     userRegistry.getLoginListener()
                             .onError(json.getJsonObject("content").getString("errorMessage"));

@@ -47,7 +47,7 @@ public class User {
         //ID-то е глобално в Client.java userID; трябва да се set-не!!!!!!!!!!!!!!!!
         JsonObject jsonContent = Json
                 .createObjectBuilder()
-                .add("user", user)
+                .add("username", user)
                 .add("password", password)
                 .build();
 

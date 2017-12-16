@@ -65,13 +65,13 @@ public class ServerEndpoint {
         }
     }
 
-    @OnMessage
+  /*  @OnMessage
     public void onMessage(ByteBuffer message, Session session) throws IOException, EncodeException {
         String receiverid = filesTo.get(session);
         peers.get(receiverid).getBasicRemote().sendBinary(message);
         filesTo.remove(session);
 
-    }
+    }*/
 
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {

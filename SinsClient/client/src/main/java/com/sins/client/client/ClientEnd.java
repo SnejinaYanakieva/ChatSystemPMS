@@ -5,6 +5,7 @@
  */
 package com.sins.client.client;
 
+import com.sins.client.resolver.ResolverClient;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class ClientEnd {
          JsonReader jsonReader = Json.createReader(new StringReader(message));
         JsonObject jsonMessage = jsonReader.readObject();
         jsonReader.close();
-       
+       ResolverClient.INSTANCE.resolve(jsonMessage);
         System.out.println(jsonMessage);
     }
     

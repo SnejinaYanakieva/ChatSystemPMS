@@ -1,5 +1,7 @@
 package com.sins.server.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CurrentClient extends Person{
@@ -42,8 +44,9 @@ public class CurrentClient extends Person{
     }
     
     public List<String> validateItem() {
-        List<String> errors = null;
-        return errors;
+        List<String> errors = new ArrayList<>();
+        
+        return Collections.EMPTY_LIST;
     }
     
 }
