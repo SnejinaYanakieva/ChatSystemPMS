@@ -25,9 +25,9 @@ import javax.json.JsonReader;
  * @author SYanakieva
  */
 public class FriendService {
-    
+
     private Map<String, JsonObject> response = new HashMap<>();
-    
+
     public Map<String, JsonObject> getAllFriendsAndGroups(String userId) {
         JsonObject json = null;
         try {
@@ -55,8 +55,8 @@ public class FriendService {
         response.put(userId, json);
         return response;
     }
-    
-     public Map<String, JsonObject> searchNewFriend(String name, String userId) {
+
+    public Map<String, JsonObject> searchNewFriend(String name, String userId) {
         JsonObject json = null;
         try {
             List<Person> clients = Store.Instance.getFriendDao().searchNewFriend(name, userId);
@@ -79,6 +79,51 @@ public class FriendService {
 
         } catch (IOException ex) {
             json = JsonBuilder.INSTANCE.buildErrorJsonConent("Clients info could not be red.");
+        }
+        response.put(userId, json);
+        return response;
+    }
+
+    public Map<String, JsonObject> addNewFriend(String friendId, String userId) {
+        JsonObject json = null;
+        try {
+            Person friend = Store.Instance.getFriendDao().addNewFriend(friendId, userId);
+            if (friend != null) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                String jsonInString = objectMapper.writeValueAsString(friend);
+                JsonReader jsonReader = Json.createReader(new StringReader(jsonInString));
+                JsonObject jsonMessage = jsonReader.readObject();
+                //convert json string to object
+                json = Json
+                        .createObjectBuilder()
+                        .add("success", true)
+                        .add("friend", jsonMessage)
+                        .build();
+            } else {
+                json = JsonBuilder.INSTANCE.buildErrorJsonConent("Friend could not be added.");
+            }
+        } catch (DbException e) {
+            json = JsonBuilder.INSTANCE.buildErrorJsonConent(e.getDbErrorMessage());
+
+        } catch (IOException ex) {
+            json = JsonBuilder.INSTANCE.buildErrorJsonConent("Friend could not be added.");
+        }
+        response.put(userId, json);
+        return response;
+    }
+
+    public Map<String, JsonObject> removeFriend(String friendId, String userId) {
+        JsonObject json = null;
+        try {
+            Boolean success = Store.Instance.getFriendDao().removeFriend(friendId, userId);
+            if (success) {
+                json = JsonBuilder.INSTANCE.buildEmptySuccessJsonConent();
+            } else {
+                json = JsonBuilder.INSTANCE.buildErrorJsonConent("Remove failed!");
+            }
+        } catch (DbException e) {
+            json = JsonBuilder.INSTANCE.buildErrorJsonConent(e.getDbErrorMessage());
+
         }
         response.put(userId, json);
         return response;

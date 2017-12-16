@@ -184,11 +184,12 @@ public class Resolver {
 
     private void resolveFriendTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
+        String clientid;
         FriendService service = new FriendService();
         switch (subtype) {
             case "getAllFriends":
                 content = json.getJsonObject("content");
-                String clientid = json.getString("clientid");
+                clientid = json.getString("clientid");
                 responseContext = service.getAllFriendsAndGroups(clientid);
                 for (String id : responseContext.keySet()) {
                     responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
@@ -196,16 +197,30 @@ public class Resolver {
                 break;
             case "searchNewFriend":
                 content = json.getJsonObject("content");
-                String client = json.getString("clientid");
+                clientid = json.getString("clientid");
                 String searchName = content.getString("friendName");
-                responseContext = service.searchNewFriend(searchName, client);
+                responseContext = service.searchNewFriend(searchName, clientid);
                 for (String id : responseContext.keySet()) {
                     responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
                 }
                 break;
             case "addNewFriend":
+                content = json.getJsonObject("content");
+                clientid = json.getString("clientid");
+                String friendid = content.getString("friendID");
+                responseContext = service.searchNewFriend(friendid, clientid);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             case "removeFriend":
+                content = json.getJsonObject("content");
+                clientid = json.getString("clientid");
+                String friendId = content.getString("friendID");
+                responseContext = service.searchNewFriend(friendId, clientid);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             default:
                 String errorContent = "Requested FRIEND type subtype not recognized!";
