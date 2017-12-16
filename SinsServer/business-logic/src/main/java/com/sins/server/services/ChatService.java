@@ -5,6 +5,7 @@
  */
 package com.sins.server.services;
 
+import com.sins.server.bl.json.JsonBuilder;
 import com.sins.server.model.Group;
 import com.sins.server.model.Person;
 import com.sins.server.persistence.DbException;
@@ -74,24 +75,24 @@ public class ChatService {
         return response;
     }
 
-    public Map<String, JsonObject> sendMessageToGroup(String userId, String groupId, String message) {
-//        try {
-//            Group group = Store.Instance.getGroupDao().getGroupById(groupId);
-//        }
-//        catch(DbException ex){
-//            
-//        }
-//        for (Person friend : group.getParticipants()) {
-//            JsonObject json = Json
-//                    .createObjectBuilder()
-//                    .add("success", true)
-//                    .add("groupid", group.getId())
-//                    .add("senderid", userId)
-//                    .add("message", message)
-//                    .build();
-//
-//            response.put(friend.getId(), json);
-//        }
+   public Map<String, JsonObject> sendMessageToGroup(String userId, String groupId, String message) {
+        try {
+            Group group = Store.Instance.getGroupDao().getGroupById(groupId);
+            for (Person friend : group.getParticipants()) {
+                JsonObject json = Json
+                        .createObjectBuilder()
+                        .add("success", true)
+                        .add("groupid", group.getId())
+                        .add("senderid", userId)
+                        .add("message", message)
+                        .build();
+
+                response.put(friend.getId(), json);
+            }
+        } catch (DbException ex) {
+            JsonObject json = JsonBuilder.INSTANCE.buildErrorJsonConent(ex.getDbErrorMessage());
+             response.put(userId, json);
+        }
         return response;
     }
 }

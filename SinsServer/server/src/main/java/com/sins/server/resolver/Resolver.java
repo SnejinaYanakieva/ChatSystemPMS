@@ -155,11 +155,13 @@ public class Resolver {
     private void resolveChatTypeRequests(JsonObject json, Map<String, JsonObject> responseMap) {
         String subtype = json.getString("subtype");
         ChatService service = new ChatService();
+        String userid;
+        String receiverid;
         switch (subtype) {
             case "sendMessageToFriend":
                 content = json.getJsonObject("content");
-                String userid = content.getString("userid");
-                String receiverid = content.getString("receiverid");
+                userid = json.getString("userid");
+                receiverid = content.getString("receiverid");
                 String message = content.getString("message");
                 responseContext = service.sendMessageToFriend(receiverid, userid, message);
                 for (String id : responseContext.keySet()) {
@@ -167,12 +169,35 @@ public class Resolver {
                 }
                 break;
             case "sendFileAcceptRequest":
+                content = json.getJsonObject("content");
+                userid = json.getString("userid");
+                receiverid = content.getString("receiverid");
+                responseContext = service.sendFileAcceptRequest(userid, receiverid);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             case "sendFileAcceptResponse":
+                content = json.getJsonObject("content");
+                userid = json.getString("userid");
+                receiverid = content.getString("receiverid");
+                Boolean accepted = content.getBoolean("accepted");
+                responseContext = service.sendFileAcceptResponse(userid, receiverid, accepted);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             case "sendFileToFriend":
                 break;
             case "sendMessageToGroup":
+                content = json.getJsonObject("content");
+                userid = json.getString("userid");
+                receiverid = content.getString("groupid");
+                String groupmessage = content.getString("message");
+                responseContext = service.sendMessageToGroup(userid, receiverid, groupmessage);
+                for (String id : responseContext.keySet()) {
+                    responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                }
                 break;
             default:
                 String errorContent = "Requested CHAT type subtype not recognized!";
