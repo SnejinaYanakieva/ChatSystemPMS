@@ -198,7 +198,7 @@ public class Resolver {
             case "sendFileAcceptRequest":
                 content = json.getJsonObject("content");
                 userid = json.getString("clientid");
-                receiverid = content.getString("receiverid");
+                receiverid = content.getString("friendID");
                 responseContext = service.sendFileAcceptRequest(userid, receiverid);
                 for (String id : responseContext.keySet()) {
                     responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
@@ -217,7 +217,7 @@ public class Resolver {
             case "sendFileToFriend":
                 content = json.getJsonObject("content");
                 userid = json.getString("clientid");
-                receiverid = content.getString("receiverid");
+                receiverid = content.getString("friendID");
                 ServerEndpoint.filesTo.put(session, receiverid);
                 responseMap.put(userid, JsonBuilder.INSTANCE.buildJson(json, true, Json
                         .createObjectBuilder()
@@ -228,7 +228,7 @@ public class Resolver {
             case "sendMessageToGroup":
                 content = json.getJsonObject("content");
                 userid = json.getString("clientid");
-                receiverid = content.getString("groupid");
+                receiverid = content.getString("group");
                 String groupmessage = content.getString("message");
                 responseContext = service.sendMessageToGroup(userid, receiverid, groupmessage);
                 for (String id : responseContext.keySet()) {
