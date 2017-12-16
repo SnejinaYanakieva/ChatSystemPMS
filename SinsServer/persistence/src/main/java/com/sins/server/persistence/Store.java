@@ -19,7 +19,7 @@ public class Store {
     private Connection conn = null;
 
     public Connection getConnection() {
-        String url = "jdbc:sqlite:target/sinsdatabase.db";
+        String url = "jdbc:sqlite:sinsdatabase.db";
         try {
             if (conn == null || conn.isClosed()) {
                 conn = DriverManager.getConnection(url);

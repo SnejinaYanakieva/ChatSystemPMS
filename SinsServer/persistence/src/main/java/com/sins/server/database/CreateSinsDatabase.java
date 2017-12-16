@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class CreateSinsDatabase {
 
-    static String url = "jdbc:sqlite:target/sinsdatabase.db";
+    static String url = "jdbc:sqlite:sinsdatabase.db";
     public static Connection conn = null;
 
     public static Connection createConnection() throws Exception {
