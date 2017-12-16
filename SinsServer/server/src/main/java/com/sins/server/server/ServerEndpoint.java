@@ -68,7 +68,8 @@ public class ServerEndpoint {
     @OnMessage
     public void onMessage(ByteBuffer message, Session session) throws IOException, EncodeException {
         String receiverid = filesTo.get(session);
-        peers.get(receiverid).getBasicRemote().sendBinary(message);
+        message.flip();
+        peers.get(receiverid).getAsyncRemote().sendBinary(message);
         filesTo.remove(session);
 
     }

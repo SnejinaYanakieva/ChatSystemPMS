@@ -34,8 +34,9 @@ public static String userID = null;
 
         // repeatedly read a message and send it to the server (until quit)
             CurrentClient currClient = new CurrentClient();
-         currClient.setNickname("userSINS");
+         currClient.setNickname("userSINS2");
             currClient.setName("UserName");
+           // new User().register(currClient, "password2");
             new User().login("userSINS", "password");
             System.in.read();
     }

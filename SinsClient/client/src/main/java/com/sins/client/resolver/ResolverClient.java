@@ -8,6 +8,7 @@ package com.sins.client.resolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sins.client.businessLogic.Chat;
 import com.sins.client.client.Client;
+import com.sins.client.client.ClientEnd;
 import com.sins.client.listener.registry.ChatListenerRegistry;
 import com.sins.client.listener.registry.FriendListenerRegistry;
 import com.sins.client.listener.registry.GroupListenerRegistry;
@@ -21,6 +22,7 @@ import java.util.Map;
 import javax.json.JsonObject;
 import com.sins.client.model.Person;
 import com.sins.client.model.message.ServerMessage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ import javax.json.JsonValue;
 public class ResolverClient {
 
     public static final ResolverClient INSTANCE = new ResolverClient();
+    public static File fileToSend;
     private ObjectMapper mapper = new ObjectMapper();
     private UserListenerRegistry userRegistry;
     private FriendListenerRegistry friendRegistry;
@@ -272,7 +275,8 @@ public class ResolverClient {
                             .onError(json.getJsonObject("content").getString("errorMessage"));
                 }
                 break;
-            case "recieveFileFromFriend":
+            case "sendFileToFriend":
+                ClientEnd.sendMessage(fileToSend);
                 /*    senderID = json.getJsonObject("content").getJsonObject("senderID").toString();
                 accept = json.getJsonObject("content").getJsonObject("file").toString();// нужна имплементация ИЗПРАЩАНЕ НА ФАЙЛ
                  */

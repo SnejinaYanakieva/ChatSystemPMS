@@ -8,10 +8,13 @@ package com.sins.client.businessLogic;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sins.client.client.Client;
 import com.sins.client.client.ClientEnd;
+import com.sins.client.resolver.ResolverClient;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -21,8 +24,9 @@ import javax.json.JsonReader;
  * @author Стефан
  */
 public class Chat {
-  PrintWriter chatHistoryWriter;
-  
+
+    PrintWriter chatHistoryWriter;
+
     public void sendMessageToFriend(String recieverID, String message) throws IOException {
         JsonObject jsonContent = Json
                 .createObjectBuilder()
@@ -64,12 +68,12 @@ public class Chat {
 
     public void sendFileToFriend(String recieverID, File file) throws IOException {
         //Няма да използваме sendMessage ,a ще напишем sendFile binary!!!!!!!!!!!!!!!!!!!!!!
-/* JsonObject jsonContent = Json
+        JsonObject jsonContent = Json
                 .createObjectBuilder()
                 .add("friendID", recieverID)
-               // .add("file", file)
+                // .add("file", file)
                 .build();
-        
+
         JsonObject json = Json
                 .createObjectBuilder()
                 .add("type", "CHAT")
@@ -77,7 +81,9 @@ public class Chat {
                 .add("clientid", Client.userID)
                 .add("content", jsonContent)
                 .build();
-        ClientEnd.sendMessage(json);*/
+        ResolverClient.fileToSend = file;
+        ClientEnd.sendMessage(json);
+
     }
 
     public void sendMessageToGroup(Group group, String message) throws IOException {
