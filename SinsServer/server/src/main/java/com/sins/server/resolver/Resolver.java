@@ -67,7 +67,7 @@ public class Resolver {
                     String password = content.getString("password");
                     responseContext = service.register(currenClient, password);
                     for (String id : responseContext.keySet()) {
-                        responseMap.put(id, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
+                        ServerEndpoint.sendMessage(session, JsonBuilder.INSTANCE.buildJson(json, true, responseContext.get(id)));
                     }
                     break;
 
