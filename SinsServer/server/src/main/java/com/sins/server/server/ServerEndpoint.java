@@ -38,7 +38,6 @@ public class ServerEndpoint {
     public void onOpen(Session session) {
         System.out.println("New session created.");
     }
-    
 
     @OnMessage
     public void onMessage(String message, Session session) throws IOException, EncodeException {
@@ -46,8 +45,10 @@ public class ServerEndpoint {
         JsonObject jsonMessage = jsonReader.readObject();
         jsonReader.close();
         try {
-            Map<String, JsonObject> map= Resolver.INSTANCE.resolve(jsonMessage, session);
-            sendMessage(map);
+            Map<String, JsonObject> map = Resolver.INSTANCE.resolve(jsonMessage, session);
+            if (!map.isEmpty()) {
+                sendMessage(map);
+            }
         } catch (Exception e) {
             JsonObject jsonResponse = Json
                     .createObjectBuilder(jsonMessage)
@@ -57,12 +58,12 @@ public class ServerEndpoint {
                             .build())
                     .add("success", false)
                     .build();
-         
+
             sendMessage(session, jsonResponse);
         }
     }
-    
-       @OnMessage
+
+    @OnMessage
     public void onMessage(File message, Session session) throws IOException, EncodeException {
     }
 
@@ -78,10 +79,10 @@ public class ServerEndpoint {
             sendMessage(peers.get(message.getKey()), message.getValue());
         }
     }
-    
-     public static void sendMessage(Session session, JsonObject messageJson) throws IOException {
-            session.getBasicRemote().sendText(messageJson.toString());
-        }
+
+    public static void sendMessage(Session session, JsonObject messageJson) throws IOException {
+        session.getBasicRemote().sendText(messageJson.toString());
+    }
 
     private List<String> getClientIdsBySession(Session session) {
         return peers.entrySet()
