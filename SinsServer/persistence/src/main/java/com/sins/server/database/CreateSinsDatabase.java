@@ -1,5 +1,6 @@
 package com.sins.server.database;
 
+import com.sins.server.persistence.Store;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,11 +9,10 @@ import java.sql.Statement;
 public class CreateSinsDatabase {
 
     static String url = "jdbc:sqlite:target/sinsdatabase.db";
-    static Connection conn = null;
+    public static Connection conn = null;
 
     public static Connection createConnection() throws Exception {
-        conn = DriverManager.getConnection(url);
-        return conn;
+        return Store.Instance.getConnection();
     }
 
     public static void closeConnection() throws Exception {

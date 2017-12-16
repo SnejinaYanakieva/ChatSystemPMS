@@ -17,12 +17,7 @@ public class TestSinsDatabase {
 
     private static void connect() throws Exception {
 
-        String url = "jdbc:sqlite:target/sinsdatabase.db";
-        try {
-           conn =  CreateSinsDatabase.createConnection();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        conn =  Store.Instance.getConnection();
     }
 
     public static boolean insert(String id, String username, String password) {
@@ -53,6 +48,7 @@ public class TestSinsDatabase {
         query = "DROP TABLE IF EXISTS GROUPS";
         st.executeUpdate(query);
 
+        CreateSinsDatabase.conn = conn;
         createTableUSERS();
         createTableUSER_PERSONAL_INFO();
         createTableGROUPS();
