@@ -187,7 +187,7 @@ public class Resolver {
         switch (subtype) {
             case "sendMessageToFriend":
                 content = json.getJsonObject("content");
-                userid = json.getString("userid");
+                userid = json.getString("clientid");
                 receiverid = content.getString("receiverid");
                 String message = content.getString("message");
                 responseContext = service.sendMessageToFriend(receiverid, userid, message);
@@ -197,7 +197,7 @@ public class Resolver {
                 break;
             case "sendFileAcceptRequest":
                 content = json.getJsonObject("content");
-                userid = json.getString("userid");
+                userid = json.getString("clientid");
                 receiverid = content.getString("receiverid");
                 responseContext = service.sendFileAcceptRequest(userid, receiverid);
                 for (String id : responseContext.keySet()) {
@@ -206,7 +206,7 @@ public class Resolver {
                 break;
             case "sendFileAcceptResponse":
                 content = json.getJsonObject("content");
-                userid = json.getString("userid");
+                userid = json.getString("clientid");
                 receiverid = content.getString("receiverid");
                 Boolean accepted = content.getBoolean("accepted");
                 responseContext = service.sendFileAcceptResponse(userid, receiverid, accepted);
@@ -216,7 +216,7 @@ public class Resolver {
                 break;
             case "sendFileToFriend":
                 content = json.getJsonObject("content");
-                userid = json.getString("userid");
+                userid = json.getString("clientid");
                 receiverid = content.getString("receiverid");
                 ServerEndpoint.filesTo.put(session, receiverid);
                 responseMap.put(userid, JsonBuilder.INSTANCE.buildJson(json, true, Json
@@ -227,7 +227,7 @@ public class Resolver {
                 break;
             case "sendMessageToGroup":
                 content = json.getJsonObject("content");
-                userid = json.getString("userid");
+                userid = json.getString("clientid");
                 receiverid = content.getString("groupid");
                 String groupmessage = content.getString("message");
                 responseContext = service.sendMessageToGroup(userid, receiverid, groupmessage);
