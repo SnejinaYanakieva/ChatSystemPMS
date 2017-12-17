@@ -22,7 +22,7 @@ public class FriendDaoImpl implements FriendDao {
         List<Person> friendList = new ArrayList<Person>();
         
         Connection conn = Store.Instance.getConnection();
-                
+               
         try {
             
             List<String> frList = new ArrayList<String>(Arrays.asList(list.split(", ")));
@@ -30,7 +30,7 @@ public class FriendDaoImpl implements FriendDao {
             for (int i = 0; i < frList.size(); i++) {
                 
                 Person person = new Person();
- 
+                
                 String sql = "SELECT USERS.ID, USER_PERSONAL_INFO.NAME, IS_ACTIVE "
                    + "FROM USERS "
                    + "INNER JOIN USER_PERSONAL_INFO ON USER_PERSONAL_INFO.ID = USERS.ID  "
@@ -103,6 +103,9 @@ public class FriendDaoImpl implements FriendDao {
     public ChatClient getAllFriendsAndGroups(String userid) throws DbException {
         
         ChatClient chClient = new ChatClient();
+        
+        List<Person> emptyFriendList = new ArrayList<Person>();
+        List<Group> emptyGroupList = new ArrayList<Group>();
                 
         String sql = "SELECT ID, NAME, FRIEND_LIST, GROUP_LIST "
                    + "FROM USER_PERSONAL_INFO "
@@ -127,9 +130,15 @@ public class FriendDaoImpl implements FriendDao {
                     gList = rs.getString("GROUP_LIST");
                 }                
                 
-                chClient.setFriendList(this.getListPerson(fList));
-                chClient.setGroupLIst(this.getListGroup(gList));
+                if(fList != null && fList.length() > 0)               
+                    chClient.setFriendList(this.getListPerson(fList));
+                else
+                    chClient.setFriendList(emptyFriendList);
                 
+                if(gList != null && gList.length() > 0)
+                    chClient.setGroupLIst(this.getListGroup(gList));
+                else 
+                    chClient.setGroupLIst(emptyGroupList);
                 return chClient;
                 
         } catch (SQLException e) {
@@ -154,6 +163,10 @@ public class FriendDaoImpl implements FriendDao {
             pstmt.setString(1, name);
             
             ResultSet rs = pstmt.executeQuery();
+            
+            if(!rs.isBeforeFirst()) {
+                throw new DbException("User with such name does not exist.");
+            }
             
             while (rs.next()) {
                 person.setId(rs.getString("ID"));
@@ -195,7 +208,7 @@ public class FriendDaoImpl implements FriendDao {
                 fList = rs.getString("FRIEND_LIST");
             }
         
-        if(fList.length() == 0) {
+        if(fList == null || fList.length() == 0) {
             fList = id;
         }
         else {

@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
             
             return true;
         } catch (SQLException e) {
-            throw new DbException("Failed to register.");
+            throw new DbException("Registration failed. User with the same username already exists.");
         }
     }
 
@@ -68,7 +68,10 @@ public class UserDaoImpl implements UserDao {
             
             ResultSet rs = pstmt2.executeQuery();
             
-
+            if(!rs.isBeforeFirst()) {
+                throw new DbException("Username or password is wrong.");
+            }
+            
             while (rs.next()) {
                 person.setId(rs.getString("ID"));
                 person.setName(rs.getString("NAME"));

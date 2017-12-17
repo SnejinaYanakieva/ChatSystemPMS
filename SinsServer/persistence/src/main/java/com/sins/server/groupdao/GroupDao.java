@@ -14,5 +14,4 @@ public interface GroupDao {
     List<Person> getAllGroupParticipants(String groupid) throws DbException;
     boolean deleteGroup(String groupid) throws DbException;
     Group getGroupById(String groupId) throws DbException;
-    
 }

@@ -26,7 +26,9 @@ public class CreateSinsDatabase {
                 + "	USERNAME TEXT NOT NULL,\n"
                 + "	PASSWORD TEXT NOT NULL, \n"
                 + "     IS_ACTIVE BOOLEAN, \n"
-                + "     PRIMARY KEY (ID)\n"
+                + "     PRIMARY KEY (ID),\n"
+                + "     CONSTRAINT UNIQUE_ID UNIQUE (ID),\n"
+                + "     CONSTRAINT UNIQUE_USERNAME UNIQUE (USERNAME)\n"
                 + ");";
 
         try (
@@ -47,7 +49,8 @@ public class CreateSinsDatabase {
                 + "     CITY TEXT, \n"
                 + "     FRIEND_LIST TEXT, \n"
                 + "     GROUP_LIST TEXT, \n"
-                + "     PRIMARY KEY (ID)\n"
+                + "     PRIMARY KEY (ID),\n"
+                + "     CONSTRAINT UNIQUE_ID2 UNIQUE (ID)\n"
                 + ");";
 
         try (
@@ -65,7 +68,8 @@ public class CreateSinsDatabase {
                 + "	NAME TEXT NOT NULL,\n"
                 + "	OWNER_ID TEXT NOT NULL, \n"
                 + "     PARTICIPANT_LIST TEXT, \n"
-                + "     PRIMARY KEY (ID)\n"
+                + "     PRIMARY KEY (ID),\n"
+                + "     CONSTRAINT UNIQUE_GR_ID UNIQUE (ID)\n"
                 + ");";
 
         try (

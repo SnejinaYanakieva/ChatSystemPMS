@@ -41,35 +41,23 @@ public class TestBase {
         currCl.setPhone("0879587795");
         currCl.setCity("Varna");
         
-        testCl.setNickname("zeedor4o");
-        testCl.setName("Ivelin Petkov");
+        testCl.setNickname("naseleto");
+        testCl.setName("Atanas Petkov");
         testCl.setEmail("naseleto@abv.bg");
         testCl.setPhone("0888888888");
         testCl.setCity("Sofia");
         
-        String password = "1234";
                 
         UserDaoImpl usrDao = new UserDaoImpl();
         FriendDaoImpl frDao = new FriendDaoImpl();
         GroupDaoImpl grDao = new GroupDaoImpl();
         
-        /*conn = createConnection();
-        createTableUSERS();
-        createTableUSER_PERSONAL_INFO();
-        createTableGROUPS();
-        closeConnection();*/
-        //usrDao.register(currCl, password);
-        //System.out.println(usrDao.login("zeedor4o", "1234").getId());
-        //System.out.println(usrDao.readPersonalInfo("c3b2d067-1a77-4a39-b60a-d2a8d9688f46").getId());
-        //usrDao.logout("5cc89e53-9e23-4f15-962a-cfa85d5f1865");
-        //System.out.println(usrDao.readPersonalInfo("5cc89e53-9e23-4f15-962a-cfa85d5f1865").getisActive());
+        //frDao.addNewFriend("09c76ac7-a4e8-420e-a176-b15b2c53c3c1", "5873fc2f-4701-4fe6-a60d-a6a17a79f284");
+        //frDao.removeFriend("09c76ac7-a4e8-420e-a176-b15b2c53c3c1", "5873fc2f-4701-4fe6-a60d-a6a17a79f284");
+        
+        //grDao.deleteGroup("3fc036af-05af-4187-81d8-07136a274179");
         
         
-        //System.out.println(frDao.getAllFriendsAndGroups("c5fb657d-4123-4cc8-93dd-0ff41917409a").getId());
-        //System.out.println(frDao.addNewFriend("52c2dd01-0141-4f3a-b625-f0c74e034318", "c5fb657d-4123-4cc8-93dd-0ff41917409a").getFriendList().get(1).getName());
-        //frDao.addNewFriend("c5fb657d-4123-4cc8-93dd-0ff41917409a", "c5fb657d-4123-4cc8-93dd-0ff41917409a");
-        
-        grDao.createGroup("Grupa 2", "52c2dd01-0141-4f3a-b625-f0c74e034318");
-        
+       
     }   
 }

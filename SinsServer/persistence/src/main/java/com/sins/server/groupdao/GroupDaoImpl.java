@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,6 +42,10 @@ public class GroupDaoImpl implements GroupDao {
             pstmt.setString(1, groupId);
             
             ResultSet rs = pstmt.executeQuery();
+            
+            if(!rs.isBeforeFirst()) {
+                throw new DbException("Group does not exist.");
+            }
             
             while (rs.next()) {
                 group.setId(rs.getString("ID"));
@@ -102,7 +107,7 @@ public class GroupDaoImpl implements GroupDao {
                 grList = rs.getString("GROUP_LIST");
             }
             
-            if(grList.length() == 0) {
+            if(grList == null || grList.length() == 0) {
                 grList = groupID;
             }
             else {
@@ -146,8 +151,7 @@ public class GroupDaoImpl implements GroupDao {
                 parList = rs.getString("PARTICIPANT_LIST");
             }
             
-            System.out.println("Parlist:" + parList + ":endParlist");
-            if(parList.length() == 0) {
+            if(parList == null || parList.length() == 0) {
                 parList = friendid;
             }
             else {
@@ -272,7 +276,6 @@ public class GroupDaoImpl implements GroupDao {
             while (rs.next()) {
                 grList = rs.getString("GROUP_LIST");
             }
-            System.out.println(grList);
             if(grList.contains(groupid + ", ")) {
                 grList = grList.replace(groupid + ", ", "");
             }
@@ -282,7 +285,6 @@ public class GroupDaoImpl implements GroupDao {
             else if(grList.contains(groupid)) {
                 grList = grList.replace(groupid, "");
             }
-            System.out.println(grList);
             
             pstmt3.setString(1, grList);
             pstmt3.setString(2, grOwner);
