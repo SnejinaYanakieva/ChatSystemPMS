@@ -11,6 +11,6 @@ public interface UserDao {
     CurrentClient readPersonalInfo(String userid) throws DbException;
     CurrentClient updatePersonalInfo(String userid, CurrentClient curClient) throws DbException;
     boolean logout(String userid) throws DbException;
-    boolean deleteUser(String userid) throws DbException;
+    //boolean deleteUser(String userid) throws DbException;
     
 }

@@ -6,7 +6,7 @@ public class Person extends PersistentItem {
     
     private boolean isActive;
 
-    public boolean isIsActive() {
+    public boolean getisActive() {
         return isActive;
     }
 
