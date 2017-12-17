@@ -9,8 +9,8 @@ import java.util.List;
 public interface FriendDao {
     
     ChatClient getAllFriendsAndGroups(String userid) throws DbException;
-    List<Person> searchNewFriend(String name, String userid) throws DbException;
-    Person addNewFriend(String id, String userid) throws DbException;
-    boolean removeFriend(String id, String userid) throws DbException;
+    List<Person> searchNewFriend(String name) throws DbException;
+    ChatClient addNewFriend(String id, String userid) throws DbException;
+    ChatClient removeFriend(String id, String userid) throws DbException;
     
 }

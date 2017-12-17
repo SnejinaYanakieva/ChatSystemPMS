@@ -59,7 +59,7 @@ public class FriendService {
     public Map<String, JsonObject> searchNewFriend(String name, String userId) {
         JsonObject json = null;
         try {
-            List<Person> clients = Store.Instance.getFriendDao().searchNewFriend(name, userId);
+            List<Person> clients = Store.Instance.getFriendDao().searchNewFriend(name);
             if (clients != null) {
                 ObjectMapper objectMapper = new ObjectMapper();
                 String jsonInString = objectMapper.writeValueAsString(clients);
@@ -115,8 +115,8 @@ public class FriendService {
     public Map<String, JsonObject> removeFriend(String friendId, String userId) {
         JsonObject json = null;
         try {
-            Boolean success = Store.Instance.getFriendDao().removeFriend(friendId, userId);
-            if (success) {
+            ChatClient success = Store.Instance.getFriendDao().removeFriend(friendId, userId);
+            if (success != null) {
                 json = JsonBuilder.INSTANCE.buildEmptySuccessJsonConent();
             } else {
                 json = JsonBuilder.INSTANCE.buildErrorJsonConent("Remove failed!");

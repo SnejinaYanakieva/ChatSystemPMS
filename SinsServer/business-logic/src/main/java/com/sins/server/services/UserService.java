@@ -153,7 +153,7 @@ public class UserService {
     }
       
        public Map<String, JsonObject> deleteUser(String userId) {
-        JsonObject json = null;
+        /*JsonObject json = null;
             try {
                 Boolean success = Store.Instance.getUserDao().deleteUser(userId);
                 if (success) {
@@ -165,7 +165,7 @@ public class UserService {
                 json = JsonBuilder.INSTANCE.buildErrorJsonConent(e.getDbErrorMessage());
 
             }
-        response.put(userId, json);
+        response.put(userId, json);*/
         return response;
     }
 }

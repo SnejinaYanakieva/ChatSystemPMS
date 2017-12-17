@@ -68,14 +68,13 @@ public class UserDaoImpl implements UserDao {
             
             ResultSet rs = pstmt2.executeQuery();
             
+
             while (rs.next()) {
                 person.setId(rs.getString("ID"));
                 person.setName(rs.getString("NAME"));
                 person.setIsActive(rs.getBoolean("IS_ACTIVE"));
             }
-            
-            
-            
+                     
             return person;
             
         } catch (SQLException e) {
