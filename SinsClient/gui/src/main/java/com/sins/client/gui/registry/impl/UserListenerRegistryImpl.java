@@ -1,32 +1,16 @@
 package com.sins.client.gui.registry.impl;
 
 import com.sins.client.listener.ResponseListener;
-import com.sins.client.listener.registry.GroupListenerRegistry;
-import com.sins.client.model.Group;
+import com.sins.client.listener.registry.UserListenerRegistry;
+import com.sins.client.model.CurrentClient;
 
-public class GroupListenerRegistryImpl implements GroupListenerRegistry{
-
-    @Override
-    public ResponseListener deleteGroup() {
-        return new ResponseListener(){
-            
-            @Override
-            public void onSuccess(Object response) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-            
-            @Override
-            public void onError(String error) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        };
-    }
+public class UserListenerRegistryImpl implements UserListenerRegistry{
 
     @Override
-    public ResponseListener<Group> createGroup() {
-          return new ResponseListener<Group>() {
+    public ResponseListener<String> getRegisterListener() {
+        return new ResponseListener<String>() {
             @Override
-            public void onSuccess(Group response) {
+            public void onSuccess(String response) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
@@ -38,10 +22,10 @@ public class GroupListenerRegistryImpl implements GroupListenerRegistry{
     }
 
     @Override
-    public ResponseListener<Group> addFriendToGroup() {
-        return new ResponseListener<Group>(){
+    public ResponseListener<String> getLoginListener() {
+        return new ResponseListener<String>() {
             @Override
-            public void onSuccess(Group response) {
+            public void onSuccess(String response) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
@@ -53,10 +37,40 @@ public class GroupListenerRegistryImpl implements GroupListenerRegistry{
     }
 
     @Override
-    public ResponseListener<Group> removeFriendFromGroup() {
-        return new ResponseListener<Group>(){
+    public ResponseListener<CurrentClient> getShowPersonalInfoListener() {
+        return new ResponseListener<CurrentClient>() {
             @Override
-            public void onSuccess(Group response) {
+            public void onSuccess(CurrentClient response) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onError(String error) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }  
+        };
+    }
+
+    @Override
+    public ResponseListener<String> getLogoutListener() {
+        return new ResponseListener<String>() {
+            @Override
+            public void onSuccess(String response) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onError(String error) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+    }
+
+    @Override
+    public ResponseListener<String> getDeleteUserListener() {
+        return new ResponseListener<String>() {
+            @Override
+            public void onSuccess(String response) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 

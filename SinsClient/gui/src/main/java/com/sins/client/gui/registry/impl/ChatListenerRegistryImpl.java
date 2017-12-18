@@ -1,32 +1,18 @@
 package com.sins.client.gui.registry.impl;
 
 import com.sins.client.listener.ResponseListener;
-import com.sins.client.listener.registry.GroupListenerRegistry;
-import com.sins.client.model.Group;
+import com.sins.client.listener.registry.ChatListenerRegistry;
+import com.sins.client.model.message.ServerMessage;
+import java.io.File;
+import java.util.Map;
 
-public class GroupListenerRegistryImpl implements GroupListenerRegistry{
-
-    @Override
-    public ResponseListener deleteGroup() {
-        return new ResponseListener(){
-            
-            @Override
-            public void onSuccess(Object response) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-            
-            @Override
-            public void onError(String error) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        };
-    }
+public class ChatListenerRegistryImpl implements ChatListenerRegistry{
 
     @Override
-    public ResponseListener<Group> createGroup() {
-          return new ResponseListener<Group>() {
+    public ResponseListener<ServerMessage<String>> getMessageFromFriend() {
+        return new ResponseListener<ServerMessage<String>>(){
             @Override
-            public void onSuccess(Group response) {
+            public void onSuccess(ServerMessage<String> response) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
@@ -38,10 +24,10 @@ public class GroupListenerRegistryImpl implements GroupListenerRegistry{
     }
 
     @Override
-    public ResponseListener<Group> addFriendToGroup() {
-        return new ResponseListener<Group>(){
+    public ResponseListener<ServerMessage<String>> getFileAcceptRequest() {
+        return new ResponseListener<ServerMessage<String>>(){
             @Override
-            public void onSuccess(Group response) {
+            public void onSuccess(ServerMessage<String> response) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
@@ -53,10 +39,40 @@ public class GroupListenerRegistryImpl implements GroupListenerRegistry{
     }
 
     @Override
-    public ResponseListener<Group> removeFriendFromGroup() {
-        return new ResponseListener<Group>(){
+    public ResponseListener<ServerMessage<Boolean>> getFileAcceptResponse() {
+        return new ResponseListener<ServerMessage<Boolean>>(){
             @Override
-            public void onSuccess(Group response) {
+            public void onSuccess(ServerMessage<Boolean> response) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onError(String error) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+    }
+
+    @Override
+    public ResponseListener<ServerMessage<File>> getFileFromFriend() {
+        return new ResponseListener<ServerMessage<File>>(){
+            @Override
+            public void onSuccess(ServerMessage<File> response) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onError(String error) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        };
+    }
+
+    @Override
+    public ResponseListener<ServerMessage<Map<String, String>>> getMessageFromGroup() {
+        return new ResponseListener<ServerMessage<Map<String, String>>>(){
+            @Override
+            public void onSuccess(ServerMessage<Map<String, String>> response) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 

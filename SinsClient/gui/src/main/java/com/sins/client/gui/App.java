@@ -23,6 +23,7 @@ public class App extends Application
         primaryStage.setTitle("SINS - Login");
         Scene scene = new Scene(root);
         
+        //primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
