@@ -44,7 +44,7 @@ public class ClientEnd {
 
     @OnMessage
     public void onMessage(ByteBuffer message) throws IOException {
-        File file = new File("filename");
+        File file = new File("filename1");
         boolean append = false;
         FileChannel wChannel = new FileOutputStream(file, append).getChannel();
         wChannel.write(message);
@@ -62,7 +62,7 @@ public class ClientEnd {
         FileInputStream is = new FileInputStream(message);
         is.getChannel().read(buf);
           buf.flip();
-        session.getAsyncRemote().sendBinary(buf);
+        session.getBasicRemote().sendBinary(buf);
     }
 
     public static void setSession(Session session) {

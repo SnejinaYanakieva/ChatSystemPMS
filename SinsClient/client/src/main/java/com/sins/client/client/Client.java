@@ -21,7 +21,7 @@ public static String userID = null;
 
     public static final String SERVER = "ws://localhost:8080/ws/chat";
 
-    public static void main(String[] args) throws Exception {
+    public static void startClientApplication() throws Exception {
         ClientManager client = ClientManager.createClient();
         String message;
 
@@ -37,8 +37,7 @@ public static String userID = null;
          currClient.setNickname("userSINS2");
             currClient.setName("UserName");
            // new User().register(currClient, "password2");
-            new User().login("userSINS", "password");
-            System.in.read();
+         //   new User().login("userSINS", "password");
     }
 
     private static String createUserJson(String message) {

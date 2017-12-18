@@ -85,8 +85,8 @@ public class ResolverClient {
             case "register":
 
                 if (success) {
-                   /*userRegistry.getRegisterListener()
-                            .onSuccess("Successfully registered");*/
+                   userRegistry.getRegisterListener()
+                            .onSuccess("Successfully registered");
                     System.out.println("Successfully registred !");
                 } else {
                     userRegistry.getRegisterListener()
@@ -97,11 +97,11 @@ public class ResolverClient {
             case "login":
                 if (success) {
                   Client.userID = json.getJsonObject("content").getString("clientid");
-                  /*   userRegistry.getLoginListener()
-                            .onSuccess("Successfully loggedin");*/
-                  if(Client.userID.equals("6210b090-9043-4252-9cdc-15be424c5a22")){
-                  new Chat().sendMessageToFriend("ff2b17ab-cc87-402e-a974-7555998bc653","Zdr!"); 
-                  }// --изпращам на userSINS2
+                     userRegistry.getLoginListener()
+                            .onSuccess("Successfully loggedin");
+//                  if(Client.userID.equals("1fd5a312-650e-4ded-b74c-232af1fb0742")){
+//                  new Chat().sendFileToFriend("733f731c-bcfd-4cbc-aa83-5f3dd82619e1",new File("F:\\pictures\\castle\\03.jpg")); 
+//                  }// --изпращам на userSINS2
                     System.out.println("Successfully LOGEDIN !");
                 } else {
                     userRegistry.getLoginListener()
