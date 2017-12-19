@@ -86,7 +86,7 @@ public class Resolver {
 
                     break;
                 case "readPersonalInfo":
-                    content = json.getJsonObject("content");
+                  
                     String clientid = json.getString("clientid");
                     responseContext = service.readPersonalInfo(clientid);
                     for (String id : responseContext.keySet()) {
@@ -109,7 +109,7 @@ public class Resolver {
                     }
                     break;
                 case "logout":
-                    content = json.getJsonObject("content");
+                   
                     String client = json.getString("clientid");
                     responseContext = service.logout(client);
                     for (String id : responseContext.keySet()) {
@@ -249,7 +249,7 @@ public class Resolver {
         FriendService service = new FriendService();
         switch (subtype) {
             case "getAllFriends":
-                content = json.getJsonObject("content");
+               
                 clientid = json.getString("clientid");
                 responseContext = service.getAllFriendsAndGroups(clientid);
                 for (String id : responseContext.keySet()) {
