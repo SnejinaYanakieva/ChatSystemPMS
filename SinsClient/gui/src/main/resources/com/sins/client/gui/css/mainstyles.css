@@ -14,12 +14,11 @@
     -fx-background-color: #808080 ;
     -fx-text-fill: orangered ;
     -fx-font-weight: bold;
-    -fx-padding: 5px 5px;
+    -fx-padding: 5px;
     -fx-text-align: center;
     -fx-text-decoration: none;
     -fx-display: inline-block;
 }
-
 
 .hyperlink:hover, hyperlink:active {
         -fx-background-color: #757575;
@@ -79,3 +78,42 @@
     -fx-padding: 0.0em 0.0em 0.0em 0.0em;
 }
 
+.list-cell:empty {
+    visibility: hidden;
+}
+
+.list-cell{
+    -fx-background-color:  lavenderblush;
+    -fx-text-color: black;
+    -fx-cell-size: 50 ;
+    -fx-animated: true;
+    -fx-padding: 1px;
+}
+
+.list-cell:hover{
+    -fx-background-color: blanchedalmond;
+}
+
+.list-cell:selected{
+    -fx-text-color: black;
+    -fx-background-color: lightblue;
+}
+
+.send {
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-background-color: lightskyblue ;
+    -fx-border-width: 2px;
+    -fx-padding: 10;
+}
+
+.send:after{
+    
+}
+
+.receive {
+    -fx-font-size: 12px;
+    -fx-text-fill: black;
+    -fx-border-color: black;
+    -fx-background-color: salmon  ;
+}

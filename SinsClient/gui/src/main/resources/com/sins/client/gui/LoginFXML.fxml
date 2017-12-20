@@ -26,38 +26,62 @@
       </AnchorPane>
       <AnchorPane layoutX="450.0" prefHeight="550.0" prefWidth="450.0" styleClass="loginPane" stylesheets="@css/loginstyles.css">
          <children>
-            <Pane fx:id="reg_pane" layoutX="56.0" layoutY="104.0" prefHeight="305.0" prefWidth="330.0" style="-fx-border-color: #989898; -fx-border-radius: 2px;" visible="false">
+            <Pane fx:id="reg_pane" layoutX="56.0" layoutY="58.0" prefHeight="435.0" prefWidth="330.0" style="-fx-border-color: #989898; -fx-border-radius: 2px;" visible="false">
                <children>
-                  <Label id="text" layoutX="82.0" layoutY="29.0" text="Register" textAlignment="CENTER">
+                  <Label id="text" layoutX="80.0" layoutY="25.0" text="Register" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="40.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/username.png" />
+                        <Image url="@images/account.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/password.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/password.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="reg_user_txt" layoutX="91.0" layoutY="105.0" promptText="username / email" />
-                  <PasswordField fx:id="reg_pass_txt" layoutX="91.0" layoutY="147.0" promptText="password" />
-                  <PasswordField fx:id="reg_repass_txt" layoutX="91.0" layoutY="190.0" promptText="repeat password" />
-                  <Button id="register" fx:id="reg_btn" layoutX="119.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="76.0" stylesheets="@css/loginstyles.css" text="Register" textAlignment="CENTER">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/password.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="reg_user" layoutX="90.0" layoutY="90.0" promptText="username" />
+                  <PasswordField fx:id="reg_pass" layoutX="90.0" layoutY="130.0" promptText="password" />
+                  <PasswordField fx:id="reg_repass" layoutX="90.0" layoutY="170.0" promptText="repeat password" />
+                  <TextField fx:id="reg_name" layoutX="90.0" layoutY="210.0" promptText="real name" />
+                  <TextField fx:id="reg_phone" layoutX="90.0" layoutY="290.0" promptText="telephone" />
+                  <TextField fx:id="reg_city" layoutX="90.0" layoutY="330.0" promptText="city" />
+                  <TextField fx:id="reg_email" layoutX="90.0" layoutY="250.0" promptText="email" />
+                  <Button id="register" fx:id="reg_btn" layoutX="119.0" layoutY="369.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="76.0" stylesheets="@css/loginstyles.css" text="Register" textAlignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Hyperlink fx:id="reg_hlink" layoutX="130.0" layoutY="267.0" onAction="#handleHyperlinkAction" text="or Log in" />
-                  <Label layoutX="134.0" layoutY="270.0" text="or" />
+                  <Hyperlink fx:id="reg_hlink" layoutX="130.0" layoutY="402.0" onAction="#handleHyperlinkAction" text="or Log in" />
+                  <Label layoutX="134.0" layoutY="405.0" text="or" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/username.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/email.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/telephone.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="45.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/city.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane fx:id="log_pane" layoutX="57.0" layoutY="110.0" prefHeight="219.0" prefWidth="330.0" style="-fx-border-color: #A0A0A0; -fx-border-radius: 2px;">
@@ -67,29 +91,30 @@
                         <Font name="System Bold" size="40.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="19.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/username.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="19.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/password.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="log_user_txt" layoutX="57.0" layoutY="99.0" promptText="username / email" styleClass="text-field" stylesheets="@css/loginstyles.css" />
-                  <PasswordField fx:id="log_pass_txt" layoutX="57.0" layoutY="143.0" promptText="password" />
-                  <CheckBox fx:id="log_checkbox" layoutX="57.0" layoutY="183.0" mnemonicParsing="false" text="Remember me" />
-                  <Button id="login" fx:id="log_btn" layoutX="220.0" layoutY="120.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="47.0" prefWidth="90.0" stylesheets="@css/loginstyles.css" text="Sign In" textAlignment="CENTER">
+                  <TextField fx:id="log_user" layoutX="60.0" layoutY="100.0" promptText="username" styleClass="text-field" stylesheets="@css/loginstyles.css" />
+                  <PasswordField fx:id="log_pass" layoutX="60.0" layoutY="140.0" promptText="password" />
+                  <CheckBox fx:id="log_checkbox" layoutX="60.0" layoutY="180.0" mnemonicParsing="false" text="Remember me" />
+                  <Button id="login" fx:id="log_btn" layoutX="220.0" layoutY="120.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="90.0" stylesheets="@css/loginstyles.css" text="Sign In" textAlignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Hyperlink fx:id="log_hlink" layoutX="220.0" layoutY="180.0" onAction="#handleHyperlinkAction" text="Create account." />
+                  <Hyperlink fx:id="log_hlink" layoutX="220.0" layoutY="175.0" onAction="#handleHyperlinkAction" text="Create account." />
                </children>
                <effect>
                   <ColorAdjust />
                </effect>
             </Pane>
+            <Label fx:id="errorMessage" alignment="CENTER" layoutX="160.0" layoutY="500.0" textFill="#dd1010" underline="true" wrapText="true" />
          </children>
       </AnchorPane>
    </children>
