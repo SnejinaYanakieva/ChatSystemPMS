@@ -29,7 +29,7 @@
                   </ImageView>
                   <VBox prefHeight="80.0" prefWidth="221.0">
                      <children>
-                        <Label prefHeight="39.0" prefWidth="222.0" text="User Name" />
+                        <Label fx:id="userName" prefHeight="39.0" prefWidth="222.0" text="User Name" />
                         <ChoiceBox fx:id="statusBar" prefHeight="30.0" prefWidth="80.0" />
                      </children>
                   </VBox>
@@ -68,6 +68,8 @@
                 </Tab>
               </tabs>
             </TabPane>
+            <Button fx:id="addFriend" layoutX="176.0" layoutY="140.0" mnemonicParsing="false" onAction="#addFriendButton" text="Add" />
+            <Button fx:id="searchButton" layoutX="175.0" layoutY="105.0" mnemonicParsing="false" onAction="#addFriendButton" text="Search" />
          </children></AnchorPane>
       <VBox fx:id="chatWindow" layoutX="300.0" layoutY="30.0" prefHeight="520.0" prefWidth="600.0">
          <children>

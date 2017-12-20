@@ -31,8 +31,9 @@ public class LoginFXMLController implements Initializable {
     public static Stage stage;
     public static Thread register, register_failed, login, login_failed;
     public static final Button loginButton = new Button();
-
-
+    
+    public static String error;
+    
     @FXML private Pane reg_pane, log_pane;
     @FXML private Hyperlink reg_hlink, log_hlink;
     @FXML private TextField reg_user, reg_pass, reg_repass, reg_name, reg_email, reg_phone, reg_city, log_user, log_pass;
@@ -143,7 +144,7 @@ public class LoginFXMLController implements Initializable {
                     @Override
                     public void run() {
                         try {
-                            errorMessage.setText("Account already exists!");
+                            errorMessage.setText(error);
                         } catch (Exception ex) {
                             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -159,7 +160,7 @@ public class LoginFXMLController implements Initializable {
                     @Override
                     public void run() {
                         try {
-                            errorMessage.setText("Wrong username/password!");
+                            errorMessage.setText(error);
                         } catch (Exception ex) {
                             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }

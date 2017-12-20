@@ -1,12 +1,20 @@
 package com.sins.client.gui;
 
+import com.sins.client.businessLogic.Friend;
+import com.sins.client.businessLogic.User;
 import com.sins.client.gui.bubble.BubbleSpec;
 import com.sins.client.gui.bubble.BubbleLabel;
+import com.sins.client.model.ChatClient;
+import com.sins.client.model.CurrentClient;
+import com.sins.client.model.Person;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.List;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,27 +42,34 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class MainFXMLController implements Initializable {
 
+    public static Thread readInfo, readInfoError, getAllFriends, addFriend, searchFriend, searchFriendError;
+    public static User user;
+    public static CurrentClient info;
+    public static ChatClient friendsList;
+    public static Person person;
+    public static List<Person> searchList;
+    public static Friend friend;
+    public static String error;
+    
     @FXML private Hyperlink logout_hlink;
-    @FXML private ListView<String> listViewFriends, listViewConversations;
+    @FXML private ListView<Person> listViewFriends;
+    @FXML private ListView<String> listViewConversations;
     @FXML private TextField searchBar, serverChat;
     @FXML private ListView chatPanel;
-    @FXML private Button sendButton, sendFileButton;
+    @FXML private Button sendButton, sendFileButton, addFriendButton, searchButton;
     @FXML private TextArea messageBox;
     @FXML private ChoiceBox statusBar;
+    @FXML private Label userName;
     
-    private List<Label> messages = new ArrayList<>();
-    private int index = 0;
+    public ObservableList<Person> friends, searchFriends;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        ObservableList<String> friends = FXCollections.observableArrayList (
-            "Lois", "Ben", "Marco Polo", "The dude in black xD", "MEGAS", "a", "b", "c", "d", "e", "f", "kk", "asd", "sad", "sad");
-        listViewFriends.setItems(friends);
         
         ObservableList<String> chats = FXCollections.observableArrayList (
             "I just took the biggest shit..", "...and then he did...", "Last night was AWESOME!...", "mom HELP...");
@@ -62,6 +77,57 @@ public class MainFXMLController implements Initializable {
         
         statusBar.setItems(FXCollections.observableArrayList(
             "Online", "Away", "Busy", new Separator(), "Offline"));
+        statusBar.getSelectionModel().selectFirst();
+        
+        readInfo = new Thread(){
+           @Override
+           public void run(){
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            userName.setText(info.getNickname());
+                            userName.setText("testing");
+                        } catch (Exception ex) {
+                            Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+           }
+        };
+        
+        readInfoError = new Thread(){
+           @Override
+           public void run(){
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            userName.setText(error);
+                        } catch (Exception ex) {
+                            Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+           }
+        };
+        
+        getAllFriends = new Thread(){
+           @Override
+           public void run(){
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            friends = FXCollections.observableArrayList (friendsList.getFriendList());
+                            listViewFriends.setItems(friends);
+                        } catch (Exception ex) {
+                            Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+           }
+        };
     }    
     
     @FXML
@@ -79,11 +145,6 @@ public class MainFXMLController implements Initializable {
             catch (IOException e) {
                 e.printStackTrace();
             }
-    }
-    
-    @FXML
-    private void sendButtonAction() throws IOException {
-        
     }
     
     @FXML
@@ -111,8 +172,77 @@ public class MainFXMLController implements Initializable {
     }
     
     @FXML
-    private void sendFileButton(){
+    private void addFriendButton(KeyEvent event){
+        if(((Control)event.getSource()).getId() == addFriendButton.getId()){
+            
+        }
+        if(((Control)event.getSource()).getId() == searchButton.getId()){
+            try {
+                friend.searchNewFriend(searchBar.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
+        addFriend = new Thread(){
+           @Override
+           public void run(){
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            
+                        } catch (Exception ex) {
+                            Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+           }
+        };
+        
+        searchFriend = new Thread(){
+           @Override
+           public void run(){
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            userName.setText("Found!");
+                        } catch (Exception ex) {
+                            Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+           }
+        };
+        
+        searchFriendError = new Thread(){
+           @Override
+           public void run(){
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            userName.setText(error);
+                        } catch (Exception ex) {
+                            Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                });
+           }
+        };
+    }
+    
+    @FXML
+    private void sendFileButton(){
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            userName.setText("File selected: " + selectedFile.getName());
+        }
+        else {
+            userName.setText("File selection cancelled.");
+        }
     }
       
     @FXML

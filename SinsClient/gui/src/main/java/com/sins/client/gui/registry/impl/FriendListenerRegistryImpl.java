@@ -5,6 +5,7 @@
  */
 package com.sins.client.gui.registry.impl;
 
+import com.sins.client.gui.MainFXMLController;
 import com.sins.client.listener.ResponseListener;
 import com.sins.client.listener.registry.FriendListenerRegistry;
 import com.sins.client.listener.registry.UserListenerRegistry;
@@ -29,17 +30,53 @@ public class FriendListenerRegistryImpl implements FriendListenerRegistry{
 
     @Override
     public ResponseListener<ChatClient> getAllFriends() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ResponseListener<ChatClient>(){
+            @Override
+            public void onSuccess(ChatClient response) {
+                MainFXMLController.friendsList = response;
+                MainFXMLController.getAllFriends.run();
+            }
+
+            @Override
+            public void onError(String error) {
+                MainFXMLController.error = error;
+            }
+            
+        };
     }
 
     @Override
     public ResponseListener<List<Person>> searchNewFriend() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ResponseListener<List<Person>>(){
+            @Override
+            public void onSuccess(List<Person> response) {
+                MainFXMLController.searchFriend.run();
+            }
+
+            @Override
+            public void onError(String error) {
+                MainFXMLController.error = error;
+                MainFXMLController.searchFriendError.run();
+            }
+            
+        };
     }
 
     @Override
     public ResponseListener<Person> addNewFriend() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ResponseListener<Person>(){
+            @Override
+            public void onSuccess(Person response) {
+                MainFXMLController.person = response;
+                MainFXMLController.addFriend.run();
+            }
+
+            @Override
+            public void onError(String error) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+            
+        };
     }
 
     @Override
