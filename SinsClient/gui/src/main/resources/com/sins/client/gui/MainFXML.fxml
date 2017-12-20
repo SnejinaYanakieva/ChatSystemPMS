@@ -57,19 +57,20 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="     Conversations     ">
+                <Tab text="      SearchBar     ">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ListView fx:id="listViewConversations" prefHeight="300.0" prefWidth="300.0" stylesheets="@css/mainstyles.css" />
+                              <ListView fx:id="listViewSearch" prefHeight="300.0" prefWidth="300.0" stylesheets="@css/mainstyles.css" />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
               </tabs>
             </TabPane>
-            <Button fx:id="addFriend" layoutX="176.0" layoutY="140.0" mnemonicParsing="false" onAction="#addFriendButton" text="Add" />
+            <Button fx:id="addFriendButton" layoutX="176.0" layoutY="140.0" mnemonicParsing="false" onAction="#addFriendButton" text="Add" />
             <Button fx:id="searchButton" layoutX="175.0" layoutY="105.0" mnemonicParsing="false" onAction="#addFriendButton" text="Search" />
+            <Label fx:id="serverMessage" layoutX="10.0" layoutY="80.0" text="Server Message:" />
          </children></AnchorPane>
       <VBox fx:id="chatWindow" layoutX="300.0" layoutY="30.0" prefHeight="520.0" prefWidth="600.0">
          <children>

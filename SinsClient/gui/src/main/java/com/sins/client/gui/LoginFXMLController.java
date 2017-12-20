@@ -1,5 +1,6 @@
 package com.sins.client.gui;
 
+import com.sins.client.businessLogic.Friend;
 import com.sins.client.businessLogic.User;
 import com.sins.client.model.CurrentClient;
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class LoginFXMLController implements Initializable {
     public static final Button loginButton = new Button();
     
     public static String error;
+    public static String userName;
     
     @FXML private Pane reg_pane, log_pane;
     @FXML private Hyperlink reg_hlink, log_hlink;
@@ -113,6 +115,10 @@ public class LoginFXMLController implements Initializable {
                             stage.setScene(new Scene(root));
                             stage.show();
                             ((Node)(event.getSource())).getScene().getWindow().hide();
+                            
+                            new User().readPersonalInfo();
+                            new Friend().getAllFriends();
+                            
                         } catch (IOException ex) {
                             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }

@@ -48,36 +48,30 @@ import javafx.stage.Stage;
 public class MainFXMLController implements Initializable {
 
     public static Thread readInfo, readInfoError, getAllFriends, addFriend, searchFriend, searchFriendError;
-    public static User user;
     public static CurrentClient info;
-    public static ChatClient friendsList;
+    public static ChatClient friendsList; //getAllFriends thread
     public static Person person;
-    public static List<Person> searchList;
+    public static List<Person> searchList; // searchFriend thread
     public static Friend friend;
     public static String error;
     
     @FXML private Hyperlink logout_hlink;
-    @FXML private ListView<Person> listViewFriends;
-    @FXML private ListView<String> listViewConversations;
+    @FXML private ListView<Person> listViewFriends, listViewSearch;
     @FXML private TextField searchBar, serverChat;
     @FXML private ListView chatPanel;
     @FXML private Button sendButton, sendFileButton, addFriendButton, searchButton;
     @FXML private TextArea messageBox;
     @FXML private ChoiceBox statusBar;
-    @FXML private Label userName;
+    @FXML private Label userName, serverMessage;
     
     public ObservableList<Person> friends, searchFriends;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        ObservableList<String> chats = FXCollections.observableArrayList (
-            "I just took the biggest shit..", "...and then he did...", "Last night was AWESOME!...", "mom HELP...");
-        listViewConversations.setItems(chats);
-        
         statusBar.setItems(FXCollections.observableArrayList(
             "Online", "Away", "Busy", new Separator(), "Offline"));
         statusBar.getSelectionModel().selectFirst();
+        
         
         readInfo = new Thread(){
            @Override
@@ -87,7 +81,6 @@ public class MainFXMLController implements Initializable {
                     public void run() {
                         try {
                             userName.setText(info.getNickname());
-                            userName.setText("testing");
                         } catch (Exception ex) {
                             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -103,7 +96,7 @@ public class MainFXMLController implements Initializable {
                     @Override
                     public void run() {
                         try {
-                            userName.setText(error);
+                            serverMessage.setText(error);
                         } catch (Exception ex) {
                             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -173,10 +166,16 @@ public class MainFXMLController implements Initializable {
     
     @FXML
     private void addFriendButton(KeyEvent event){
-        if(((Control)event.getSource()).getId() == addFriendButton.getId()){
-            
+        if(((Control)event.getSource()).getId().equals(addFriendButton.getId())){
+            if(listViewSearch.isFocused()){
+                try {
+                    friend.addNewFriend(listViewSearch.getSelectionModel().getSelectedItem().getId());
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
-        if(((Control)event.getSource()).getId() == searchButton.getId()){
+        if(((Control)event.getSource()).getId().equals(searchButton.getId())){
             try {
                 friend.searchNewFriend(searchBar.getText());
             } catch (IOException ex) {
@@ -191,7 +190,11 @@ public class MainFXMLController implements Initializable {
                     @Override
                     public void run() {
                         try {
+                            friends = FXCollections.observableArrayList (friendsList.getFriendList());
+                            listViewFriends.setItems(friends);
                             
+                            new User().readPersonalInfo();
+                            new Friend().getAllFriends();
                         } catch (Exception ex) {
                             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -207,7 +210,8 @@ public class MainFXMLController implements Initializable {
                     @Override
                     public void run() {
                         try {
-                            userName.setText("Found!");
+                            searchFriends = FXCollections.observableArrayList(searchList);
+                            listViewSearch.setItems(searchFriends);
                         } catch (Exception ex) {
                             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -223,7 +227,7 @@ public class MainFXMLController implements Initializable {
                     @Override
                     public void run() {
                         try {
-                            userName.setText(error);
+                            serverMessage.setText(error);
                         } catch (Exception ex) {
                             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -248,7 +252,7 @@ public class MainFXMLController implements Initializable {
     @FXML
     private void sendMessageOnEnter(KeyEvent event)
     {
-        if(((Control)event.getSource()).getId() == serverChat.getId()){
+        if(((Control)event.getSource()).getId().equals(serverChat.getId())){
             if(event.getCode() == KeyCode.ENTER){
                 if (!serverChat.getText().isEmpty()) {
                     Image image = new Image(getClass().getClassLoader().getResource("com/sins/client/gui/images/account.png").toString());
@@ -270,7 +274,7 @@ public class MainFXMLController implements Initializable {
             }
         }
         
-        if(((Control)event.getSource()).getId() == messageBox.getId()){
+        if(((Control)event.getSource()).getId().equals(messageBox.getId())){
             if(event.getCode() == KeyCode.ENTER){
                 if (!messageBox.getText().isEmpty()) {
                     Image image = new Image(getClass().getClassLoader().getResource("com/sins/client/gui/images/home2.png").toString());
