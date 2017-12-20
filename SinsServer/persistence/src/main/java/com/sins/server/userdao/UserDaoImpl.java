@@ -54,7 +54,7 @@ public class UserDaoImpl implements UserDao {
         
         String sql2 = "SELECT USERS.ID, NAME, IS_ACTIVE "
                     + "FROM USER_PERSONAL_INFO INNER JOIN USERS ON USER_PERSONAL_INFO.ID = USERS.ID "
-                    + "WHERE USERNAME = ?";
+                    + "WHERE USERNAME = ? AND PASSWORD = ?";
         
         try (Connection conn = Store.Instance.getConnection();
                 PreparedStatement pstmt  = conn.prepareStatement(sql);
@@ -65,6 +65,7 @@ public class UserDaoImpl implements UserDao {
             pstmt.executeUpdate();// -- UPDATE USERS
             
             pstmt2.setString(1, username);
+            pstmt2.setString(2, password);
             
             ResultSet rs = pstmt2.executeQuery();
             
@@ -164,7 +165,7 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    /*@Override
+   /* @Override
     public boolean deleteUser(String userid) {
         
         String sql1 = "DELETE FROM USER_PERSONAL_INFO "
