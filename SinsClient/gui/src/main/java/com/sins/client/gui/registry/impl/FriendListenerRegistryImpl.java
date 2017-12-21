@@ -50,7 +50,8 @@ public class FriendListenerRegistryImpl implements FriendListenerRegistry{
         return new ResponseListener<List<Person>>(){
             @Override
             public void onSuccess(List<Person> response) {
-                MainFXMLController.searchList = response;
+                MainFXMLController.searchList.clear();
+                MainFXMLController.searchList.addAll(response);
                 MainFXMLController.searchFriend.run();
             }
 

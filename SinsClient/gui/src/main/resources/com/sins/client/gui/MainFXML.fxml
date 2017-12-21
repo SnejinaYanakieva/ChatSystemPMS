@@ -69,7 +69,7 @@
               </tabs>
             </TabPane>
             <Button fx:id="addFriendButton" layoutX="176.0" layoutY="140.0" mnemonicParsing="false" onAction="#addFriendButton" text="Add" />
-            <Button fx:id="searchButton" layoutX="175.0" layoutY="105.0" mnemonicParsing="false" onAction="#addFriendButton" text="Search" />
+            <Button fx:id="searchButton" layoutX="175.0" layoutY="105.0" mnemonicParsing="false" onAction="#SearchButtonFunction" text="Search" />
             <Label fx:id="serverMessage" layoutX="10.0" layoutY="80.0" text="Server Message:" />
          </children></AnchorPane>
       <VBox fx:id="chatWindow" layoutX="300.0" layoutY="30.0" prefHeight="520.0" prefWidth="600.0">

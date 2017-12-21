@@ -30,6 +30,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
@@ -44,6 +45,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class MainFXMLController implements Initializable {
 
@@ -165,22 +167,11 @@ public class MainFXMLController implements Initializable {
     }
     
     @FXML
-    private void addFriendButton(KeyEvent event){
-        if(((Control)event.getSource()).getId().equals(addFriendButton.getId())){
-            if(listViewSearch.isFocused()){
-                try {
-                    friend.addNewFriend(listViewSearch.getSelectionModel().getSelectedItem().getId());
-                } catch (IOException ex) {
-                    Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        if(((Control)event.getSource()).getId().equals(searchButton.getId())){
-            try {
-                friend.searchNewFriend(searchBar.getText());
-            } catch (IOException ex) {
-                Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+    private void addFriendButton(){
+        try {
+            friend.addNewFriend(listViewSearch.getSelectionModel().getSelectedItem().getId());
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         addFriend = new Thread(){
@@ -201,7 +192,16 @@ public class MainFXMLController implements Initializable {
                     }
                 });
            }
-        };
+        };   
+    }
+    
+    @FXML
+    private void SearchButtonFunction(){
+        try {
+            friend.searchNewFriend(searchBar.getText());
+        } catch (IOException ex) {
+            Logger.getLogger(MainFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         searchFriend = new Thread(){
            @Override
@@ -212,6 +212,21 @@ public class MainFXMLController implements Initializable {
                         try {
                             searchFriends = FXCollections.observableArrayList(searchList);
                             listViewSearch.setItems(searchFriends);
+                            listViewSearch.setCellFactory(new Callback<ListView<Person>, ListCell<Person>>(){
+                                @Override
+                                public ListCell<Person> call(ListView<Person> param) {
+                                    ListCell<Person> cell = new ListCell<Person>(){
+                                        @Override
+                                        protected void updateItem(Person p, boolean bln){
+                                            super.updateItem(p, bln);
+                                            if(p != null){
+                                                setText("[" + p.getId() + "] " + p.getName());
+                                            }
+                                        }
+                                    };
+                                    return cell;
+                                }
+                            });
                         } catch (Exception ex) {
                             Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
